@@ -1,0 +1,6 @@
+{
+    "iridium.npm.packageManager": "yarn",
+    "prettier.resolveGlobalModules": true,
+    "npm.packageManager": "yarn",
+    "npmRapidReady.leadingPackageManager": "yarn"
+}

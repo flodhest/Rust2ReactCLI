@@ -1,0 +1,8 @@
+{
+  "name": "RustCLI",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "flodhest <eric.flodin@aol.com>",
+  "license": "MIT",
+  "private": false
+}
