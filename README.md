@@ -94,7 +94,7 @@ Feel free to modify the provided templates or add your own files to suit your pr
 
 ## 🚧 Additional Resources
 
-- [Node.js Installation](https://nodejs.org/en/download/): Download and install Node.js version 14.x - < 15> manually if needed.
+- [Node.js Installation](https://nodejs.org/en/download/): Download and install Node.js version 14.x - < 15 manually if needed.
 
 ## 🙏 Acknowledgments
 
