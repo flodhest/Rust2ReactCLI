@@ -1,0 +1,11 @@
+C:\Users\haral\OneDrive\Desktop\RustCLI\RustCLI\target\debug\deps\libbitflags-aa85b02d8449645c.rmeta: C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\lib.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\iter.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\parser.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\traits.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\public.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\internal.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\external.rs
+
+C:\Users\haral\OneDrive\Desktop\RustCLI\RustCLI\target\debug\deps\bitflags-aa85b02d8449645c.d: C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\lib.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\iter.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\parser.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\traits.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\public.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\internal.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\external.rs
+
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\lib.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\iter.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\parser.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\traits.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\public.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\internal.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\bitflags-2.4.2\src\external.rs:

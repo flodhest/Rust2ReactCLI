@@ -1,0 +1,11 @@
+C:\Users\haral\OneDrive\Desktop\RustCLI\RustCLI\target\debug\deps\libconsole-a0e63cc79406999d.rmeta: C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\lib.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\common_term.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\kb.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\term.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\utils.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\windows_term\mod.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\ansi.rs
+
+C:\Users\haral\OneDrive\Desktop\RustCLI\RustCLI\target\debug\deps\console-a0e63cc79406999d.d: C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\lib.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\common_term.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\kb.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\term.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\utils.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\windows_term\mod.rs C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\ansi.rs
+
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\lib.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\common_term.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\kb.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\term.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\utils.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\windows_term\mod.rs:
+C:\Users\haral\.cargo\registry\src\index.crates.io-6f17d22bba15001f\console-0.15.8\src\ansi.rs:
