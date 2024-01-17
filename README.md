@@ -12,7 +12,7 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 - **TypeScript-Based React App:** Generates a React app using TypeScript, providing strong static typing and improved developer experience.
 
-- **SPA and Browser Router:** Configures your TypeScript-based React app as a Single Page Application (SPA) with browser routing for seamless navigation.
+- **SPA and Browser Router:** Configures your React app as a Single Page Application (SPA) with browser routing for seamless navigation.
 
 - **Progressive Web App (PWA):** Sets up a basic service worker to enable Progressive Web App features, enhancing the user experience.
 
