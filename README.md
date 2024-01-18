@@ -4,8 +4,6 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 ## 🚀 Features
 
-- **Node.js Version Check:** RustCLI checks for the required Node.js version (14.x-<15) and provides an option to download and install it if needed.
-
 - **Project Structure:** Sets up a well-organized project structure with directories for services, models, components, styles, and source code.
 
 - **File Templates:** Adds essential files and boilerplate code, including placeholder components, backend service, models, environment files, and a service worker.
