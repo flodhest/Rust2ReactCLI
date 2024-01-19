@@ -31,171 +31,72 @@ fn setup_project_directories_and_files(project_name: &str) {
             "src/components",
             "src/styles",
             "src",
+            "public",  // Add the public directory
         ],
     );
 
-    // Read PlaceholderComponent1 content from file
-    let placeholder_component1_content = fs::read_to_string("src/PlaceholderComponent1.txt")
-        .expect("Failed to read PlaceholderComponent1.txt");
+    // Read and write PlaceholderComponent1 content
+    copy_template_file(
+        "src/PlaceholderComponent1.txt",
+        &react_app_path,
+        "src/components/PlaceholderComponent1.tsx",
+    );
 
-    // Write PlaceholderComponent1 content to file
-    fs::write(
-        format!(
-            "{}/src/components/PlaceholderComponent1.tsx",
-            &react_app_path
-        ),
-        placeholder_component1_content,
-    )
-    .expect("Failed to add PlaceholderComponent1.tsx");
+    // Read and write PlaceholderComponent2 content
+    copy_template_file(
+        "src/PlaceholderComponent2.txt",
+        &react_app_path,
+        "src/components/PlaceholderComponent2.tsx",
+    );
 
-    // Read PlaceholderComponent2 content from file
-    let placeholder_component2_content = fs::read_to_string("src/PlaceholderComponent2.txt")
-        .expect("Failed to read PlaceholderComponent2.txt");
+    // Read and write BackendService boilerplate content
+    copy_template_file(
+        "src/backend_service_boilerplate.txt",
+        &react_app_path,
+        "src/Service/BackendService.ts",
+    );
 
-    // Write PlaceholderComponent2 content to file
-    fs::write(
-        format!(
-            "{}/src/components/PlaceholderComponent2.tsx",
-            &react_app_path
-        ),
-        placeholder_component2_content,
-    )
-    .expect("Failed to add PlaceholderComponent2.tsx");
+    // Read and write PlaceholderModel content
+    copy_template_file("src/models.txt", &react_app_path, "src/Models/PlaceholderModel.tsx");
 
-    // Read BackendService boilerplate content
-    let backend_service_boilerplate_content = include_str!("backend_service_boilerplate.txt");
+    // Write development and production environment files
+    fs::write(format!("{}/.env.development", &react_app_path), "REACT_APP_ENV=development")
+        .expect("Failed to create .env.development file");
+    fs::write(format!("{}/.env.production", &react_app_path), "REACT_APP_ENV=production")
+        .expect("Failed to create .env.production file");
 
-    // Write BackendService boilerplate content to file
-    fs::write(
-        format!("{}/src/Service/BackendService.ts", &react_app_path),
-        backend_service_boilerplate_content,
-    )
-    .expect("Failed to add BackendService.ts");
+    // Read and write PWA service worker content
+    copy_template_file("src/service-worker.txt", &react_app_path, "src/service-worker.js");
 
-    // Read PlaceholderModel content from file
-    let placeholder_model_content = include_str!("models.txt");
-
-    // Write PlaceholderModel content to file
-    fs::write(
-        format!("{}/src/Models/PlaceholderModel.tsx", &react_app_path),
-        placeholder_model_content,
-    )
-    .expect("Failed to add PlaceholderModel.tsx");
-
-    // Write development environment file
-    fs::write(
-        format!("{}/.env.development", &react_app_path),
-        "REACT_APP_ENV=development",
-    )
-    .expect("Failed to create .env.development file");
-
-    // Write production environment file
-    fs::write(
-        format!("{}/.env.production", &react_app_path),
-        "REACT_APP_ENV=production",
-    )
-    .expect("Failed to create .env.production file");
-
-    // Read PWA service worker content from file
-    let pwa_service_worker_content = fs::read_to_string("pwa-service-worker.txt")
-        .expect("Failed to read pwa-service-worker.txt");
-
-    // Write PWA service worker content to file
-    fs::write(
-        format!("{}/src/service-worker.js", &react_app_path),
-        pwa_service_worker_content,
-    )
-    .expect("Failed to add service-worker.js");
-
-    // Read Home component content from file
-    let home_component_content = include_str!("home.txt");
-
-    // Write Home component content to file
-    fs::write(
-        format!("{}/src/components/Home.tsx", &react_app_path),
-        home_component_content,
-    )
-    .expect("Failed to add Home.tsx");
+    // Read and write Home component content
+    copy_template_file("src/home.txt", &react_app_path, "src/components/Home.tsx");
 
     // Set up styles directory and write main.scss content
     let styles_dir = format!("{}/src/styles", &react_app_path);
     let main_scss_content = include_str!("main_scss.txt");
-
     fs::write(format!("{}/main.scss", &styles_dir), main_scss_content)
         .expect("Failed to write main.scss");
 
-    // Read App.tsx content from file
-    let app_tsx_content = include_str!("app_tsx.txt");
+    // Read and write App.tsx content
+    copy_template_file("src/app_tsx.txt", &react_app_path, "src/App.tsx");
 
-    // Write App.tsx content to file
-    fs::write(format!("{}/src/App.tsx", &react_app_path), app_tsx_content)
-        .expect("Failed to add App.tsx");
+    // Read and write index.html template content
+    copy_template_file("src/index_html_template.txt", &react_app_path, "public/index.html");
 
-    // Read index.html template content from file
-    let index_html_template_content = fs::read_to_string("index_html_template.txt")
-        .expect("Failed to read index_html_template.txt");
+    // Read and write index.tsx template content
+    copy_template_file("src/index_tsx_template.txt", &react_app_path, "src/index.tsx");
 
-    // Write index.html template content to file
-    fs::write(
-        format!("{}/public/index.html", &react_app_path),
-        index_html_template_content,
-    )
-    .expect("Failed to add index.html");
+    // Read and write manifest.json template content
+    copy_template_file("src/manifest_json_template.txt", &react_app_path, "public/manifest.json");
 
-    // Read index.tsx template content from file
-    let index_tsx_template_content = fs::read_to_string("index_tsx_template.txt")
-        .expect("Failed to read index_tsx_template.txt");
+    // Read and write tsconfig.json template content
+    copy_template_file("src/tsconfig_json_template.txt", &react_app_path, "tsconfig.json");
 
-    // Write index.tsx template content to file
-    fs::write(
-        format!("{}/src/index.tsx", &react_app_path),
-        index_tsx_template_content,
-    )
-    .expect("Failed to add index.tsx");
+    // Read and write .gitignore template content
+    copy_template_file("src/gitignore_template.txt", &react_app_path, ".gitignore");
 
-    // Read manifest.json template content from file
-    let manifest_json_template_content = fs::read_to_string("manifest_json_template.txt")
-        .expect("Failed to read manifest_json_template.txt");
-
-    // Write manifest.json template content to file
-    fs::write(
-        format!("{}/public/manifest.json", &react_app_path),
-        manifest_json_template_content,
-    )
-    .expect("Failed to add manifest.json");
-
-    // Read tsconfig.json template content from file
-    let tsconfig_json_template_content = fs::read_to_string("tsconfig_json_template.txt")
-        .expect("Failed to read tsconfig_json_template.txt");
-
-    // Write tsconfig.json template content to file
-    fs::write(
-        format!("{}/tsconfig.json", &react_app_path),
-        tsconfig_json_template_content,
-    )
-    .expect("Failed to add tsconfig.json");
-
-    // Read .gitignore template content from file
-    let gitignore_template_content = fs::read_to_string("gitignore_template.txt")
-        .expect("Failed to read gitignore_template.txt");
-
-    // Write .gitignore template content to file
-    fs::write(
-        format!("{}/.gitignore", &react_app_path),
-        gitignore_template_content,
-    )
-    .expect("Failed to add .gitignore");
-
-    // Read package.json template content from file
-    let package_json_template_content = fs::read_to_string("package_json_template.txt")
-        .expect("Failed to read package_json_template.txt");
-
-    // Write package.json template content to file
-    fs::write(
-        format!("{}/package.json", &react_app_path),
-        package_json_template_content,
-    )
-    .expect("Failed to add package.json");
+    // Read and write package.json template content
+    copy_template_file("src/package_json_template.txt", &react_app_path, "package.json");
 
     println!("Project setup completed successfully!");
 }
@@ -206,4 +107,11 @@ fn create_directories(base_path: &str, directories: &[&str]) {
         fs::create_dir_all(format!("{}/{}", base_path, dir))
             .expect(&format!("Failed to create {} directory", dir));
     }
+}
+
+// Function to read a template file and write its content to another file
+fn copy_template_file(template_file: &str, base_path: &str, target_file: &str) {
+    let content = fs::read_to_string(template_file).expect(&format!("Failed to read {}", template_file));
+    fs::write(format!("{}/{}", base_path, target_file), content)
+        .expect(&format!("Failed to add {}", target_file));
 }
