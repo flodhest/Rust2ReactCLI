@@ -4,7 +4,7 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 ## 🚀 Features
 
-- **Project Structure:** Sets up a well-organized project structure with directories for services, models, components, styles, and source code.
+- **Project Structure:** Sets up a well-organized project structure with directories for services, models, components, styles, and source code, following a 3-tier architecture. Each tier is organized in a separate directory, promoting a clean and scalable code structure.
 
 - **File Templates:** Adds essential files and boilerplate code, including placeholder components, backend service, models, environment files, and a service worker.
 
@@ -75,28 +75,13 @@ Before using RustCLI, ensure that you have Node.js version >14.x - <15 installed
 
     This command starts your React app, and you can view it by navigating to `http://localhost:3000` in your web browser.
 
-
-## 📁 Project Structure
-
-The project structure created by RustCLI includes the following directories:
-
-- `src/Service`: Backend service-related files.
-- `src/Models`: Data model definitions.
-- `src/Components`: React components.
-- `src/Styles`: Styling files.
-- `src`: Main source code directory.
-
-## 🎨 Customization
-
-Feel free to modify the provided templates or add your own files to suit your project requirements. RustCLI aims to provide a solid starting point that you can build upon.
-
 ## 🚧 Additional Resources
 
 - [Node.js Installation](https://nodejs.org/en/download/): Download and install Node.js version 14.x - < 15 manually if needed.
 
 ## 🙏 Acknowledgments
 
-RustCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts and [open](https://crates.io/crates/open) crate for opening a URL.
+RustCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts.
 
 ## 📄 License
 
