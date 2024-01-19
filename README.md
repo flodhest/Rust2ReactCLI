@@ -4,7 +4,7 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 ## 🚀 Features
 
-- **Project Structure:** Sets up a well-organized project structure with directories for services, models, components, styles, and source code, following a 3-tier architecture. Each tier is organized in a separate directory, promoting a clean and scalable code structure. This 3-tier architecture facilitates the separation of concerns, making it easier to maintain and extend your React app as it grows.
+- **Project Structure:** Sets up a well-organized project structure with directories for services, models, components, styles, and source code, following a 3-tier architecture. Each tier is organized in a separate directory, promoting a clean and scalable code structure.
 
 - **File Templates:** Adds essential files and boilerplate code, including placeholder components, backend service, models, environment files, and a service worker.
 
