@@ -1,9 +1,0 @@
-/node_modules
-/build
-/.DS_Store
-.env
-/target/
-/debug/
-
-.DS_Store
-.idea
