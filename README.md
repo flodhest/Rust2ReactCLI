@@ -81,7 +81,7 @@ Before using RustCLI, ensure that you have Node.js version >14.x - <15 installed
 
 ## 🙏 Acknowledgments
 
-RustCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts and [open](https://crates.io/crates/open) crate for opening a URL.
+RustCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts.
 
 ## 📄 License
 
