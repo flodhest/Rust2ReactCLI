@@ -1,4 +1,4 @@
-# RustCLI - 🦀 Fast and Efficient React App Setup
+# Rust2ReactCLI - 🦀 Fast and Efficient React App Setup
 
 RustCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With RustCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
 
