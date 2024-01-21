@@ -79,7 +79,7 @@ fn setup_project_directories_and_files(project_name: &str) {
     copy_template_file(
         "src/service-worker.txt",
         &react_app_path,
-        "src/service-worker.js",
+        "public/service-worker.js",
     );
 
     // Read and write Home component content
