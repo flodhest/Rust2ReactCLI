@@ -29,7 +29,7 @@ Before using RustCLI, ensure that you have Node.js version >=16.20.2 installed o
 1. **Clone the RustCLI repository to your local machine:**
 
     ```bash
-    git clone https://github.com/flodhest/rustcli.git
+    git clone https://github.com/flodhest/Rust2ReactCLI.git
     cd rustcli
     ```
 
