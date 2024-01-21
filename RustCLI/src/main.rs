@@ -85,11 +85,15 @@ fn setup_project_directories_and_files(project_name: &str) {
     // Read and write Home component content
     copy_template_file("src/home.txt", &react_app_path, "src/components/Home.tsx");
 
-    // Set up styles directory and write main.scss content
-    let styles_dir = format!("{}/src/styles", &react_app_path);
-    let main_scss_content = include_str!("main_scss.txt");
-    fs::write(format!("{}/main.scss", &styles_dir), main_scss_content)
-        .expect("Failed to write main.scss");
+  // Add an import statement for main.scss
+    let content_with_import = if target_file.ends_with("index.tsx") {
+        format!("{}\nimport './styles/main.scss';", content)
+    } else {
+        content
+    };
+
+    fs::write(format!("{}/{}", base_path, target_file), content_with_import)
+        .expect(&format!("Failed to add {}", target_file));
 
     // Read and write App.tsx content
     copy_template_file("src/app_tsx.txt", &react_app_path, "src/App.tsx");
