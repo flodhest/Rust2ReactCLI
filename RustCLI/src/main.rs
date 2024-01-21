@@ -28,8 +28,8 @@ fn setup_project_directories_and_files(project_name: &str) {
         &[
             "src/Service",
             "src/Models",
-            "src/components",
-            "src/styles",
+            "src/Components",
+            "src/Styles",
             "src",
             "public",
         ],
