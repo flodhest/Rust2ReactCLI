@@ -49,7 +49,7 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
     cargo run
     ```
 
-    Follow the prompts to enter the project name and make choices regarding Node.js installation.
+    Follow the prompts to enter the project name, the project will be generated in Rust2ReactCLI/src. Run the terminal from the new projects folder. 
 
 4. **Project Setup:**
 
