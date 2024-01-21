@@ -125,9 +125,9 @@ fn setup_project_directories_and_files(project_name: &str) {
     );
 
     // Read and write Home component content
-    copy_template_file("src/home.txt", &react_app_path, "src/components/Home/Home.tsx");
-
-    generate_empty_scss_file(
+    copy_template_file("src/home.txt", &react_app_path, "src/Components/Home/Home.tsx");
+    generate_scss_file_from_template(
+        "src/home-scss.txt",
         &react_app_path,
         "src/Components/Home/Home.scss",
     );
@@ -213,4 +213,13 @@ fn copy_template_file(template_file: &str, base_path: &str, target_file: &str) {
 fn generate_empty_scss_file(base_path: &str, target_file: &str) {
     fs::write(format!("{}/{}", base_path, target_file), "")
         .expect(&format!("Failed to generate {}", target_file));
+}
+
+// Function to generate SCSS file from template
+fn generate_scss_file_from_template(template_file: &str, base_path: &str, target_file: &str) {
+    let content =
+        fs::read_to_string(template_file).expect(&format!("Failed to read {}", template_file));
+    fs::write(format!("{}/{}", base_path, target_file), content)
+        .expect(&format!("Failed to generate {}", target_file));
+
 }
