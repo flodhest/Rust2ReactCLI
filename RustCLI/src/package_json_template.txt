@@ -45,6 +45,6 @@
   "devDependencies": {
     "@typescript-eslint/parser": "6.19.0",
     "node-sass": "^9.0.0",
-    "@types/babel__generator": "^7.6.8" 
+  @babel/plugin-proposal-private-property-in-object
   }
 }

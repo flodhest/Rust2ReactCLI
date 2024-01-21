@@ -137,6 +137,11 @@ fn setup_project_directories_and_files(project_name: &str) {
     let main_scss_content = include_str!("main_scss.txt");
     fs::write(format!("{}/main.scss", &styles_dir), main_scss_content)
         .expect("Failed to write main.scss");
+
+    // Generate theme.js content
+    let theme_content = include_str!("theme_js.txt");
+    fs::write(format!("{}/theme.js", &styles_dir), theme_content)
+        .expect("Failed to write theme.js");
     
     // Read and write App.tsx content
     copy_template_file("src/app_tsx.txt", &react_app_path, "src/App.tsx");
