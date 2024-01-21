@@ -1,40 +1,52 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AppBar, Toolbar, Container, Button } from '@mui/material';
-import './styles/main.scss'; // Import the compiled CSS file
-import Home from './components/Home';
-import PlaceholderComponent1 from './components/PlaceholderComponent1';
-import PlaceholderComponent2 from './components/PlaceholderComponent2';
+import React, { Suspense } from 'react';
+import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import { AppBar, Toolbar,  Button } from '@mui/material';
+
+import './Styles/main.scss'; // Make sure the casing matches the actual file name
+
+import Home from './Components/Home';
+import PlaceholderComponent1 from './Components/PlaceholderComponent1';
+import PlaceholderComponent2 from './Components/PlaceholderComponent2';
 import Link from './Link';
 
-const App: React.FC = () => (
-  <Router>
-    <AppBar position="static">
-      <Toolbar>
-        <nav>
-          <div>
-            <Link to="/">
-              <Button color="inherit">Home</Button>
-            </Link>
-            <Link to="/placeholder1">
-              <Button color="inherit">Placeholder Component 1</Button>
-            </Link>
-            <Link to="/placeholder2">
-              <Button color="inherit">Placeholder Component 2</Button>
-            </Link>
-          </div>
-        </nav>
-      </Toolbar>
-    </AppBar>
+const loading = (
+  <div className="pt-3 text-center">
+    <div className="sk-spinner sk-spinner-pulse"></div>
+  </div>
+);
 
-    <Container>
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Suspense fallback={loading}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <AppBar position="static">
+              <Toolbar>
+                <nav>
+                  <div>
+                    <Link to="/">
+                      <Button color="inherit">Home</Button>
+                    </Link>
+                    <Link to="/placeholder1">
+                      <Button color="inherit">Placeholder Component 1</Button>
+                    </Link>
+                    <Link to="/placeholder2">
+                      <Button color="inherit">Placeholder Component 2</Button>
+                    </Link>
+                  </div>
+                </nav>
+              </Toolbar>
+            </AppBar>
+          }
+        />
+        <Route path="/home" element={<Home />} />
         <Route path="/placeholder1" element={<PlaceholderComponent1 />} />
         <Route path="/placeholder2" element={<PlaceholderComponent2 />} />
       </Routes>
-    </Container>
-  </Router>
+    </Suspense>
+  </BrowserRouter>
 );
 
 export default App;

@@ -36,18 +36,37 @@ fn setup_project_directories_and_files(project_name: &str) {
             "public",
         ],
     );
-       // Read and write PlaceholderComponent1 content
-       copy_template_file(
+
+    // Create separate folders for each component inside src/components
+    create_directories(
+        &react_app_path,
+        &[
+            "src/Components/Home",
+            "src/Components/PlaceholderComponent1",
+            "src/Components/PlaceholderComponent2",
+        ],
+    );
+
+    // Read and write PlaceholderComponent1 content
+    copy_template_file(
         "src/PlaceholderComponent1.txt",
         &react_app_path,
-        "src/components/PlaceholderComponent1.tsx",
+        "src/Components/PlaceholderComponent1/PlaceholderComponent1.tsx",
+    );
+    generate_empty_scss_file(
+        &react_app_path,
+        "src/Components/PlaceholderComponent1/PlaceholderComponent1.scss",
     );
 
     // Read and write PlaceholderComponent2 content
     copy_template_file(
         "src/PlaceholderComponent2.txt",
         &react_app_path,
-        "src/components/PlaceholderComponent2.tsx",
+        "src/Components/PlaceholderComponent2/PlaceholderComponent2.tsx",
+    );
+    generate_empty_scss_file(
+        &react_app_path,
+        "src/Components/PlaceholderComponent2/PlaceholderComponent2.scss",
     );
 
     // Read and write BackendService boilerplate content
@@ -106,7 +125,12 @@ fn setup_project_directories_and_files(project_name: &str) {
     );
 
     // Read and write Home component content
-    copy_template_file("src/home.txt", &react_app_path, "src/components/Home.tsx");
+    copy_template_file("src/home.txt", &react_app_path, "src/components/Home/Home.tsx");
+
+    generate_empty_scss_file(
+        &react_app_path,
+        "src/Components/Home/Home.scss",
+    );
 
     // Set up styles directory and write main.scss content
     let styles_dir = format!("{}/src/styles", &react_app_path);
@@ -183,4 +207,10 @@ fn copy_template_file(template_file: &str, base_path: &str, target_file: &str) {
         fs::read_to_string(template_file).expect(&format!("Failed to read {}", template_file));
     fs::write(format!("{}/{}", base_path, target_file), content)
         .expect(&format!("Failed to add {}", target_file));
+}
+
+// Function to generate an empty SCSS file
+fn generate_empty_scss_file(base_path: &str, target_file: &str) {
+    fs::write(format!("{}/{}", base_path, target_file), "")
+        .expect(&format!("Failed to generate {}", target_file));
 }
