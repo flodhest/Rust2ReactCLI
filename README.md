@@ -12,11 +12,11 @@ Rust2ReactCLI is a command-line tool designed to streamline the process of creat
 
 - **TypeScript-Based React App:** Generates a React app using TypeScript, providing strong static typing and an improved developer experience.
 
-- **Material-UI I& Responsive Design:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. This integration ensures a cohesive and visually pleasing user interface, following best practices in design. Includes styles for mobile, tablets, and desktop, ensuring a responsive and adaptable user interface.
+- **Material-UI I& Responsive Design:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. Includes setup for either Material-UI or custom media-queries for mobile, tablets, and desktop.
 
-- **SPA and Browser Router:** Transforms your React application into a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
+- **SPA and Browser Router:** Create a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
 
-- **Progressive Web App (PWA):** Elevates your application to Progressive Web App standards by implementing a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience, aligning your React app with modern web development trends.
+- **Progressive Web App (PWA):** Elevates your application to Progressive Web App standards by registring a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
 
 - **Environment Files:** Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
 
