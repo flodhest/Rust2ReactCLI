@@ -1,6 +1,6 @@
 # Rust2ReactCLI - 🦀 Fast and Efficient React App Setup
 
-RustCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
+Rust2ReactCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
 
 ## 🚀 Features
 
@@ -22,7 +22,7 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 ## 🛠 Prerequisites
 
-Before using RustCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. https://nodejs.org/dist/latest-v16.x/
+Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. https://nodejs.org/dist/latest-v16.x/
 
 ## 🏁 Getting Started
 
@@ -43,7 +43,7 @@ Before using RustCLI, ensure that you have Node.js version >=16.20.2 installed o
 
     Follow the instructions to complete the installation.
 
-3. **Build and Run RustCLI:**
+3. **Build and Run Rust2ReactCLI:**
 
     ```bash
     cargo run
@@ -83,7 +83,7 @@ Before using RustCLI, ensure that you have Node.js version >=16.20.2 installed o
 
 ## 🙏 Acknowledgments
 
-RustCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts.
+Rust2ReactCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts.
 
 ## 📄 License
 
