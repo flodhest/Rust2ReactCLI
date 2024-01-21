@@ -1,5 +1,7 @@
 # Rust2ReactCLI - 🦀 Fast and Efficient React App Setup
 
+### Implements the latest **React 18.2** ### & **TypeScript 5.3*
+
 Rust2ReactCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
 
 ## 🚀 Features
@@ -10,9 +12,7 @@ Rust2ReactCLI is a command-line tool designed to streamline the process of creat
 
 - **TypeScript-Based React App:** Generates a React app using TypeScript, providing strong static typing and an improved developer experience.
 
-- **Material-UI Integration:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. This integration ensures a cohesive and visually pleasing user interface, following best practices in design.
-
-- **Responsive Design:** Integrates media queries in the main stylesheet (`main.scss`) for optimal viewing experiences on various devices. Includes styles for mobile, tablets, and desktop, ensuring a responsive and adaptable user interface.
+- **Material-UI I& Responsive Design:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. This integration ensures a cohesive and visually pleasing user interface, following best practices in design. Includes styles for mobile, tablets, and desktop, ensuring a responsive and adaptable user interface.
 
 - **SPA and Browser Router:** Transforms your React application into a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
 
