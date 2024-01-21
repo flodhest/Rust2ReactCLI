@@ -38,6 +38,23 @@ Rust2ReactCLI empowers developers to create robust and efficient React applicati
 
    - 🎨 **Seamless Material-UI Integration:** Enhance your user interface with Material-UI components, ensuring a visually appealing and consistent design language.
 
+### 6. **Responsive Design**
+
+   - 📱 **Media Queries for Responsiveness:** Enjoy a responsive user interface with media queries, ensuring optimal viewing experiences on various devices, from mobile to desktop.
+
+### 7. **Single-Page Application (SPA) Setup**
+
+   - 🔄 **Efficient Client-Side Routing:** Transform your React application into a Single Page Application for seamless navigation and improved user experience.
+
+### 8. **Middleware and Utilities**
+
+   - ⚙️ **Middleware Support:** Easily integrate middleware into your application for advanced logic and control over actions.
+   - 🛠️ **Utility Functions:** Leverage utility functions to streamline common tasks within your application.
+
+### 9. **Theme Configuration**
+
+   - 🎨 **Theme.js Configuration:** Customize the visual style of your application with a theme.js file, allowing you to define primary and secondary colors.
+
 ## 🚀 Get Started with Rust2ReactCLI
 
 1. **Clone the Repository:**
