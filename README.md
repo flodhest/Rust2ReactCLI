@@ -4,7 +4,7 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 ## 🚀 Features
 
-- **Project Structure:** Establishes a robust and organized architecture by configuring essential directories, such as services, models, components, styles, and the source code itself. The design adheres to a Component-Based Architecture, ensuring modularity, scalability, and a clear separation of concerns within the React application.
+- **Project Structure:** Establishes a robust and organized architecture by configuring essential directories, such as services, models, components, styles, middleware, utility, and the source code itself. The design adheres to a Component-Based Architecture, ensuring modularity, scalability, and a clear separation of concerns within the React application.
 
 - **File Templates:** Integrates fundamental files and boilerplate code into the project, covering key elements like placeholder components, backend services, models, environment configuration files, and a service worker. These templates expedite the development process and provide a solid foundation for building a feature-rich React application.
 
@@ -12,17 +12,17 @@ RustCLI is a command-line tool designed to streamline the process of creating a 
 
 - **Material-UI Integration:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. This integration ensures a cohesive and visually pleasing user interface, following best practices in design.
 
+- **Responsive Design:** Integrates media queries in the main stylesheet (`main.scss`) for optimal viewing experiences on various devices. Includes styles for mobile, tablets, and desktop, ensuring a responsive and adaptable user interface.
+
 - **SPA and Browser Router:** Transforms your React application into a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
 
 - **Progressive Web App (PWA):** Elevates your application to Progressive Web App standards by implementing a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience, aligning your React app with modern web development trends.
-
-- **Responsive Design:** Integrates media queries in the main stylesheet (`main.scss`) for optimal viewing experiences on various devices. Includes styles for mobile, tablets, and desktop.
 
 - **Environment Files:** Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
 
 ## 🛠 Prerequisites
 
-Before using RustCLI, ensure that you have Node.js version >16.20.2 installed on your machine. If not, RustCLI will guide you through the installation process.
+Before using RustCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. https://nodejs.org/dist/latest-v16.x/
 
 ## 🏁 Getting Started
 
@@ -79,7 +79,7 @@ Before using RustCLI, ensure that you have Node.js version >16.20.2 installed on
 
 ## 🚧 Additional Resources
 
-- [Node.js Installation](https://nodejs.org/en/download/): Download and install Node.js version >16.20.2 manually if needed.
+- [Node.js Installation](https://nodejs.org/dist/latest-v16.x/): Download and install Node.js version >16.20.2 manually if needed.
 
 ## 🙏 Acknowledgments
 

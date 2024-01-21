@@ -1,5 +1,3 @@
-// webpack_config_template.txt
-
 const path = require('path');
 
 module.exports = {
@@ -25,4 +23,3 @@ module.exports = {
     ],
   },
 };
-

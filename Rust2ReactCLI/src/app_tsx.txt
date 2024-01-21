@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom
 import { AppBar, Toolbar, Button, CircularProgress, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './Styles/theme';
-
 import './Styles/main.scss';
 import Home from './Components/Home/Home';
 import PlaceholderComponent1 from './Components/PlaceholderComponent1/PlaceholderComponent1';

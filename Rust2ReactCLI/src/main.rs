@@ -83,12 +83,8 @@ fn setup_project_directories_and_files(project_name: &str) {
         "src/Models/PlaceholderModel.tsx",
     );
 
-        // Read and write PlaceholderModel content
-        copy_template_file(
-            "src/link_template.txt",
-            &react_app_path,
-            "src/Link.tsx",
-        );
+    // Read and write PlaceholderModel content
+    copy_template_file("src/link_template.txt", &react_app_path, "src/Link.tsx");
 
     // Read and write Utils content
     copy_template_file(
@@ -116,7 +112,6 @@ fn setup_project_directories_and_files(project_name: &str) {
     )
     .expect("Failed to create .env.production file");
 
-
     // Read and write PWA service worker content
     copy_template_file(
         "src/service-worker.txt",
@@ -125,7 +120,11 @@ fn setup_project_directories_and_files(project_name: &str) {
     );
 
     // Read and write Home component content
-    copy_template_file("src/home.txt", &react_app_path, "src/Components/Home/Home.tsx");
+    copy_template_file(
+        "src/home.txt",
+        &react_app_path,
+        "src/Components/Home/Home.tsx",
+    );
     generate_scss_file_from_template(
         "src/home-scss.txt",
         &react_app_path,
@@ -142,7 +141,7 @@ fn setup_project_directories_and_files(project_name: &str) {
     let theme_content = include_str!("theme_js.txt");
     fs::write(format!("{}/theme.js", &styles_dir), theme_content)
         .expect("Failed to write theme.js");
-    
+
     // Read and write App.tsx content
     copy_template_file("src/app_tsx.txt", &react_app_path, "src/App.tsx");
 
@@ -175,11 +174,7 @@ fn setup_project_directories_and_files(project_name: &str) {
     );
 
     // Read and write .gitignore template content
-    copy_template_file(
-        "src/gitignore_template.txt",
-        &react_app_path,
-        ".gitignore",
-    );
+    copy_template_file("src/gitignore_template.txt", &react_app_path, ".gitignore");
 
     // Read and write package.json template content
     copy_template_file(
@@ -226,5 +221,4 @@ fn generate_scss_file_from_template(template_file: &str, base_path: &str, target
         fs::read_to_string(template_file).expect(&format!("Failed to read {}", template_file));
     fs::write(format!("{}/{}", base_path, target_file), content)
         .expect(&format!("Failed to generate {}", target_file));
-
 }
