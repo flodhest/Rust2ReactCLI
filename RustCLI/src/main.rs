@@ -122,17 +122,6 @@ fn setup_project_directories_and_files(project_name: &str) {
         "tsconfig.json",
     );
 
-  // Generate package-lock.json
-    fs::write(format!("{}/package-lock.json", &react_app_path), "")
-        .expect("Failed to create package-lock.json");
-
-    // Read and write package-lock.txt content
-    copy_template_file(
-        "src/package-lock.txt",
-        &react_app_path,
-        "package-lock.json",
-    );
-
     // Read and write .gitignore template content
     copy_template_file(
         "src/gitignore_template.txt",
