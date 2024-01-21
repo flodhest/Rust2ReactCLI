@@ -30,13 +30,14 @@ fn setup_project_directories_and_files(project_name: &str) {
             "src/Models",
             "src/Components",
             "src/Styles",
+            "src/Utils",
+            "src/Middleware",
             "src",
             "public",
         ],
     );
-
-    // Read and write PlaceholderComponent1 content
-    copy_template_file(
+       // Read and write PlaceholderComponent1 content
+       copy_template_file(
         "src/PlaceholderComponent1.txt",
         &react_app_path,
         "src/components/PlaceholderComponent1.tsx",
@@ -63,6 +64,27 @@ fn setup_project_directories_and_files(project_name: &str) {
         "src/Models/PlaceholderModel.tsx",
     );
 
+        // Read and write PlaceholderModel content
+        copy_template_file(
+            "src/link_template.txt",
+            &react_app_path,
+            "src/Link.tsx",
+        );
+
+    // Read and write Utils content
+    copy_template_file(
+        "src/utils_template.txt",
+        &react_app_path,
+        "src/Utils/utils.tsx",
+    );
+
+    // Read and write Middleware content
+    copy_template_file(
+        "src/middleware.txt",
+        &react_app_path,
+        "src/Middleware/middleware.tsx",
+    );
+
     // Write development and production environment files
     fs::write(
         format!("{}/.env.development", &react_app_path),
@@ -74,6 +96,7 @@ fn setup_project_directories_and_files(project_name: &str) {
         "REACT_APP_ENV=production",
     )
     .expect("Failed to create .env.production file");
+
 
     // Read and write PWA service worker content
     copy_template_file(

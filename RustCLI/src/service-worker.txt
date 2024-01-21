@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 // service-worker.js
 const CACHE_NAME = 'my-react-app-cache-v1';
 const urlsToCache = [

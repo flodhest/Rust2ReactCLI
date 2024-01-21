@@ -1,18 +1,61 @@
 // main.scss
-body {
+
+html, body {
     background-color: #f0f0f0;
     font-family: 'Open Sans', sans-serif;
-}
-
-// Media queries for responsiveness
-@media only screen and (max-width: 600px) {
+  }
+  
+  // Media queries for responsiveness
+  @media only screen and (max-width: 600px) {
     // Styles for mobile
-}
-
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  }
+  
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
     // Styles for tablets
-}
-
-@media only screen and (min-width: 1025px) {
+  }
+  
+  @media only screen and (min-width: 1025px) {
     // Styles for desktop
-}
+  }
+ // styles.scss
+
+// Navigation styling
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    // Link container styling
+    div {
+      display: flex;
+      align-items: center;
+    }
+  
+    // Link styling
+    a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: text-decoration 0.3s, background-color 0.3s;
+  
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  
+    // Button styling
+    button {
+      transition: background-color 0.3s, color 0.3s;
+  
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+    }
+  }
+  

@@ -1,6 +1,5 @@
-// PlaceholderComponent1.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from '../Link';
 
 const PlaceholderComponent1: React.FC = () => (
   <div>

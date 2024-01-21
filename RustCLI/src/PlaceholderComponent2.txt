@@ -1,11 +1,10 @@
-// PlaceholderComponent2.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from '../Link';
 
 const PlaceholderComponent2: React.FC = () => (
   <div>
-    <h1>Placeholder Component 2</h1>
-    <p>This is another placeholder component. Feel free to modify it according to your needs.</p>
+    <h1>Placeholder Component 1</h1>
+    <p>This is a placeholder component. You can customize its content and functionality.</p>
     <Link to="/">Go to Home</Link>
   </div>
 );

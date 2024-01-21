@@ -1,9 +1,11 @@
-// src/index.tsx
 import { createRoot } from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import './styles/main.scss';
+
+// Add type declarations for global objects
+declare const navigator: Navigator;
+declare const window: Window;
 
 // Register the service worker for PWA
 if ('serviceWorker' in navigator) {
@@ -11,24 +13,22 @@ if ('serviceWorker' in navigator) {
 
   navigator.serviceWorker
     .register(serviceWorkerPath)
-    .then((registration) => {
+    .then((registration: ServiceWorkerRegistration) => {
       console.log('Service Worker registered with scope:', registration.scope);
     })
-    .catch((error) => {
+    .catch((error: Error) => {
       console.error('Error registering Service Worker:', error);
     });
 }
 
-const rootElement = document.getElementById('root');
+const rootElement = window.document.getElementById('root');
 
 if (rootElement) {
   const root = createRoot(rootElement);
   root.render(
-    <Router>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Router>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   );
 } else {
   console.error('Root element not found.');
