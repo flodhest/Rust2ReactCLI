@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from '../../Link';
-import './PlaceholderComponent1.scss'; 
+import './PlaceholderComponent1.scss';
 
-const PlaceholderComponent1: React.FC = () => (
-  <div>
-    <h1>Placeholder Component 1</h1>
-    <p>This is a placeholder component. You can customize its content and functionality.</p>
-    <Link to="/">Go to Home</Link>
-  </div>
-);
+const PlaceholderComponent1: React.FC = () => {
+  // State example
+  const [count, setCount] = useState(0);
+
+  // Effect example (similar to componentDidMount and componentDidUpdate)
+  useEffect(() => {
+    // This will run when the component mounts and every time 'count' changes
+    console.log('Component did mount or count changed:', count);
+
+    // Cleanup function (similar to componentWillUnmount)
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, [count]); // The second argument is an array of dependencies, and the effect will run when any of these dependencies change
+
+  return (
+    <div>
+      <h1>Placeholder Component 1</h1>
+      <p>This is a placeholder component. You can customize its content and functionality.</p>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((prevCount) => prevCount + 1)}>Increment Count</button>
+      <Link to="/">Go to Home</Link>
+    </div>
+  );
+};
 
 export default PlaceholderComponent1;

@@ -30,6 +30,8 @@ project_name/
 │ │ └── middleware.tsx
 │ ├── Models/
 │ │ └── PlaceholderModel.tsx
+│ ├── Security/
+│ │ └── SetupSecurity.tsx
 │ ├── Service/
 │ │ └── BackendService.ts
 │ ├── Styles/
@@ -45,6 +47,7 @@ project_name/
 ├── package.json
 ├── tsconfig.json
 └── webpack.config.js
+
 </pre>
 </details>
 

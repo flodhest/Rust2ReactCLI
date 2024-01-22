@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
-// service-worker.js
-const CACHE_NAME = 'my-react-app-cache-v1';
-const urlsToCache = [
+const CACHE_NAME = 'my-react-app-cache-v2';
+const DYNAMIC_CACHE_NAME = 'my-react-app-dynamic-cache-v1';
+const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
@@ -13,14 +13,57 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_CACHE_URLS))
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((name) => {
+          if (name !== CACHE_NAME && name !== DYNAMIC_CACHE_NAME) {
+            return caches.delete(name);
+          }
+          return null;
+        })
+      );
+    })
   );
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => response || fetch(event.request))
+    caches.match(event.request).then((staticCacheResponse) => {
+      // Check if the request is in the static cache
+      if (staticCacheResponse) {
+        return staticCacheResponse;
+      }
+
+      // If not in static cache, fetch from network and add to dynamic cache
+      return fetch(event.request)
+        .then((networkResponse) => {
+          const clonedResponse = networkResponse.clone();
+
+          caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
+            cache.put(event.request, clonedResponse);
+          });
+
+          return networkResponse;
+        })
+        .catch(() => {
+          // If fetching from network fails, check if request is in dynamic cache
+          return caches.match(event.request).then((dynamicCacheResponse) => {
+            if (dynamicCacheResponse) {
+              return dynamicCacheResponse;
+            }
+
+            // If not in dynamic cache, return a custom offline response
+            return new Response('Offline content goes here', {
+              headers: { 'Content-Type': 'text/html' },
+            });
+          });
+        });
+    })
   );
 });

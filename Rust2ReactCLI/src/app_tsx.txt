@@ -1,5 +1,4 @@
-// App.tsx
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
 import { AppBar, Toolbar, Button, CircularProgress, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -40,22 +39,46 @@ const PlaceholderComponents = () => (
   <Outlet />
 );
 
-const App: React.FC = () => (
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Router>
-      <Suspense fallback={loading}>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/placeholder/*" element={<PlaceholderComponents />}>
-            <Route path="1" element={<PlaceholderComponent1 />} />
-            <Route path="2" element={<PlaceholderComponent2 />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </Router>
-  </ThemeProvider>
-);
+const App: React.FC = () => {
+  // Example of using state with useState hook
+  const [isServiceWorkerRegistered, setServiceWorkerRegistered] = useState(false);
+
+  // Example of using useEffect hook for side effects
+  useEffect(() => {
+    // Register the service worker for PWA
+    if ('serviceWorker' in navigator) {
+      const serviceWorkerPath = `${process.env.PUBLIC_URL}/service-worker.js`;
+
+      navigator.serviceWorker
+        .register(serviceWorkerPath)
+        .then((registration: ServiceWorkerRegistration) => {
+          console.log('Service Worker registered with scope:', registration.scope);
+          setServiceWorkerRegistered(true);
+        })
+        .catch((error: Error) => {
+          console.error('Error registering Service Worker:', error);
+        });
+    }
+  }, []); // Empty dependency array means it runs once on mount
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Suspense fallback={loading}>
+          <Navbar />
+          {isServiceWorkerRegistered && <p>Service Worker is registered!</p>}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/placeholder/*" element={<PlaceholderComponents />}>
+              <Route path="1" element={<PlaceholderComponent1 />} />
+              <Route path="2" element={<PlaceholderComponent2 />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </Router>
+    </ThemeProvider>
+  );
+};
 
 export default App;

@@ -3,6 +3,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import rateLimit from 'axios-rate-limit';
 
+// Create an Axios instance with rate limiting
+const api: AxiosInstance = rateLimit(axios.create(), { maxRequests: 5, perMilliseconds: 1000 });
+
 //----------------SQL Injection-------------------
 
 // Validate API call functions against respective API schemas

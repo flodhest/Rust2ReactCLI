@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from '../../Link';
-import './PlaceholderComponent2.scss'; 
+import './PlaceholderComponent2.scss';
 
-const PlaceholderComponent2: React.FC = () => (
-  <div>
-    <h1>Placeholder Component 2</h1>
-    <p>This is a placeholder component. You can customize its content and functionality.</p>
-    <Link to="/">Go to Home</Link>
-  </div>
-);
+const PlaceholderComponent2: React.FC = () => {
+  // State example
+  const [message, setMessage] = useState('This is a placeholder component.');
+
+  // Effect example (similar to componentDidMount and componentDidUpdate)
+  useEffect(() => {
+    // This will run when the component mounts and every time 'message' changes
+    console.log('Component did mount or message changed:', message);
+
+    // Cleanup function (similar to componentWillUnmount)
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, [message]); // The second argument is an array of dependencies, and the effect will run when any of these dependencies change
+
+  return (
+    <div>
+      <h1>Placeholder Component 2</h1>
+      <p>{message}</p>
+      <button onClick={() => setMessage('Message updated!')}>Update Message</button>
+      <Link to="/">Go to Home</Link>
+    </div>
+  );
+};
 
 export default PlaceholderComponent2;
