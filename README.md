@@ -108,7 +108,8 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
 6. **Install Node.js Dependencies:**
 
     ```bash
-    npm install
+    npm i -g yarn
+    yarn install
     ```
 
     This command installs the necessary Node.js dependencies for your React app.
@@ -116,7 +117,7 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
 7. **Run Your React App:**
 
     ```bash
-    npm start
+    yarn start
     ```
 
     This command starts your React app, and you can view it by navigating to `http://localhost:3000` in your web browser.
