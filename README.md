@@ -53,22 +53,29 @@ project_name/
 
 ## 🚀 Features
 
-- **Project Structure:** Establishes a robust and organized architecture by configuring essential directories, such as services, models, components, styles, middleware, utility, and the source code itself. The design adheres to a Component-Based Architecture, ensuring modularity, scalability, and a clear separation of concerns within the React application.
+**Project Features:**
 
-- **File Templates:** Integrates fundamental files and boilerplate code into the project, covering key elements like placeholder components, backend services, models, environment configuration files, and a service worker. These templates expedite the development process and provide a solid foundation for building a feature-rich React application.
+1. **Robust Project Structure:** Establish a Component-Based Architecture, ensuring modularity, scalability, and clear separation of concerns within the React application.
 
-- **TypeScript-Based React App:** Generates a React app using TypeScript, providing strong static typing and an improved developer experience.
+2. **Efficient File Templates:** Integrate fundamental files and boilerplate code, covering components, services, models, environment configurations, and a service worker for accelerated development.
 
-- **Material-UI I& Responsive Design:** Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. Includes setup for either Material-UI or custom media-queries for mobile, tablets, and desktop.
+3. **TypeScript-Powered React App:** Generate React applications with TypeScript, providing strong static typing for an improved developer experience.
 
-- **SPA and Browser Router:** Create a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
+4. **Material-UI Integration & Responsive Design:** Enhance visual appeal and user experience by seamlessly incorporating Material-UI components with responsive design for various devices.
 
-- **Progressive Web App (PWA):** Elevates your application to Progressive Web App standards by registring a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
+5. **SPA with Browser Router:** Create a Single Page Application (SPA) with efficient client-side routing for smooth transitions between views, ensuring uninterrupted user navigation.
 
-- **Jest Testing:** Includes Jest for efficient and reliable unit testing of your React components, ensuring the robustness and reliability of your application.
+6. **Progressive Web App (PWA):** Elevate your app to PWA standards with a foundational service worker. Enable offline access, background updates and optimize caching strategies for static and dynamic content, ensuring improved offline access and responsiveness, even in challenging network conditions.
 
-- **Environment Files:** Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
+7. **Jest Testing:** Ensure application robustness with efficient and reliable Jest testing for React components.
 
+8. **Environment Configuration:** Manage environment-specific variables through dedicated files (.env.development and .env.production) for streamlined development and production environments.
+
+9. **React Hooks:** Utilize React Hooks for state management, side effects, and lifecycle events, promoting best practices for managing component lifecycles.
+
+10. **Security Measures:** Implement security measures in to validate API calls, prevent SQL injection, handle Cross-Site Scripting (XSS), and manage JSON Web Tokens (JWT) for robust protection against common web vulnerabilities.
+
+11. **Utility Functions:** Access utility functions in utils.tsx for tasks such as debouncing, whitespace checking, email format validation, currency formatting, query string parsing, and date formatting, simplifying and enhancing the development process.
 
 ## 🛠 Prerequisites
 
