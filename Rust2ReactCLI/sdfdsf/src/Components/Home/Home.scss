@@ -1,0 +1,43 @@
+// Home.scss
+.intro {
+  margin-top: 2rem;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .features {
+    margin-top: 2rem;
+
+    .feature-heading {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+
+        .icon {
+          margin-right: 1rem;
+          font-size: 1.5rem;
+        }
+
+        .feature-description {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

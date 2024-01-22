@@ -53,6 +53,11 @@ fn setup_project_directories_and_files(project_name: &str) {
         &react_app_path,
         "src/Components/PlaceholderComponent1/PlaceholderComponent1.tsx",
     );
+    copy_template_file(
+        "src/PlaceholderComponent1.test.txt",
+        &react_app_path,
+        "src/Components/PlaceholderComponent1/PlaceholderComponent1.test.tsx",
+    );
     generate_empty_scss_file(
         &react_app_path,
         "src/Components/PlaceholderComponent1/PlaceholderComponent1.scss",
@@ -63,6 +68,11 @@ fn setup_project_directories_and_files(project_name: &str) {
         "src/PlaceholderComponent2.txt",
         &react_app_path,
         "src/Components/PlaceholderComponent2/PlaceholderComponent2.tsx",
+    );
+    copy_template_file(
+        "src/PlaceholderComponent2.test.txt",
+        &react_app_path,
+        "src/Components/PlaceholderComponent2/PlaceholderComponent2.test.tsx",
     );
     generate_empty_scss_file(
         &react_app_path,
@@ -124,6 +134,11 @@ fn setup_project_directories_and_files(project_name: &str) {
         "src/home.txt",
         &react_app_path,
         "src/Components/Home/Home.tsx",
+    );
+    copy_template_file(
+        "src/Home.test.txt",
+        &react_app_path,
+        "src/Components/Home/Home.test.tsx",
     );
     generate_scss_file_from_template(
         "src/home-scss.txt",
