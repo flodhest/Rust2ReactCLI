@@ -18,7 +18,10 @@ Rust2ReactCLI is a command-line tool designed to streamline the process of creat
 
 - **Progressive Web App (PWA):** Elevates your application to Progressive Web App standards by registring a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
 
+- **Jest Testing:** Includes Jest for efficient and reliable unit testing of your React components, ensuring the robustness and reliability of your application.
+
 - **Environment Files:** Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
+
 
 ## 🛠 Prerequisites
 
@@ -64,9 +67,7 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
 6. **Install Node.js Dependencies:**
 
     ```bash
-    npm i -g yarn OR
-    npm i yarn
-    yarn install
+    npm install
     ```
 
     This command installs the necessary Node.js dependencies for your React app.
@@ -74,7 +75,7 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
 7. **Run Your React App:**
 
     ```bash
-    yarn start
+    npm start
     ```
 
     This command starts your React app, and you can view it by navigating to `http://localhost:3000` in your web browser.
