@@ -26,6 +26,9 @@ const Home: React.FC = () => (
           <strong>Progressive Web App (PWA):</strong> Elevates your application to Progressive Web App standards by registering a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
         </li>
         <li>
+          <strong>Jest Testing:</strong> Includes Jest for efficient and reliable unit testing of your React components, ensuring the robustness and reliability of your application.
+        </li>
+        <li>
           <strong>Environment Files:</strong> Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
         </li>
       </ul>
