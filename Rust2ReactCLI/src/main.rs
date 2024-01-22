@@ -27,6 +27,7 @@ fn setup_project_directories_and_files(project_name: &str) {
         &react_app_path,
         &[
             "src/Service",
+            "src/Security",
             "src/Models",
             "src/Components",
             "src/Styles",
@@ -79,11 +80,19 @@ fn setup_project_directories_and_files(project_name: &str) {
         "src/Components/PlaceholderComponent2/PlaceholderComponent2.scss",
     );
 
+    
     // Read and write BackendService boilerplate content
     copy_template_file(
         "src/backend_service_boilerplate.txt",
         &react_app_path,
-        "src/Service/BackendService.ts",
+        "src/Service/BackendService.tsx",
+    );
+
+          // Read and write DDosSecurity content
+    copy_template_file(
+        "src/Security/SetupSecurity.txt",
+        &react_app_path,
+        "src/Security/SetupSecurity.tsx",
     );
 
     // Read and write PlaceholderModel content

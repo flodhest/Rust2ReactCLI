@@ -1,8 +1,49 @@
 // Utils.tsx
 
-// This is a placeholder file for your Utils.
-// Feel free to replace the content based on your requirements.
+// Utility function to debounce a function
+export const debounce = <T extends (...args: any[]) => any>(func: T, wait: number): T => {
+  let timeout: NodeJS.Timeout;
+  return function (this: any, ...args: any[]) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  } as T;
+};
 
-export const exampleUtil = () => {
-  // Your utility function implementation goes here
-};  
+// Utility function to check if a string contains only whitespace
+export const isWhitespace = (str: string): boolean => {
+  return !str.trim();
+};
+
+// Utility function to validate email format
+export const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+// Utility function to format a number as currency
+export const formatCurrency = (amount: number, currencyCode: string = 'USD'): string => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode }).format(amount);
+};
+
+// Utility function to parse a query string into an object
+export const parseQueryString = (queryString: string): Record<string, string> => {
+  const params = new URLSearchParams(queryString);
+  const parsedObject: Record<string, string> = {};
+
+  params.forEach((value, key) => {
+    parsedObject[key] = value;
+  });
+
+  return parsedObject;
+};
+
+// Utility function to format a date string
+export const formatDate = (dateString: string, format: string = 'MMMM dd, yyyy'): string => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};

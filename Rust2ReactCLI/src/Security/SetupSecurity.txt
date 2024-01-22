@@ -1,0 +1,64 @@
+// src/Security/SetupSecurity.tsx
+
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import rateLimit from 'axios-rate-limit';
+
+//----------------SQL Injection-------------------
+
+// Validate API call functions against respective API schemas
+export const validateApiCall = (apiCall: string, schema: any): boolean => {
+  console.log(`Validating API call: ${apiCall} against schema...`);
+  // Implement your custom logic here
+  // Example: You can use a library like Joi or JSON Schema for validation
+  return true;
+};
+
+// Use SSL Certificate to secure against SQL injection
+export const useSSLCertificate = (): void => {
+  console.log('Using SSL Certificate for SQL injection prevention...');
+  // Implement your custom logic here
+  // Example: Ensure SSL certificate is configured and applied
+};
+
+//----------------Cross-Site Scripting (XSS)-------------------
+
+// Implement automated overseeing features to sanitize user input
+export const sanitizeUserInput = (input: string): string => {
+  console.log(`Sanitizing user input: ${input}`);
+  // Implement your custom logic here
+  // Example: Use a library like DOMPurify to sanitize input
+  return input.replace(/<script.*?>.*?<\/script>/gi, ''); // Remove script tags
+};
+
+// Discard malicious and invalid user input
+export const discardMaliciousInput = (input: string): string => {
+  console.log(`Discarding malicious input: ${input}`);
+  // Implement your custom logic here
+  // Example: Discard input based on specific criteria
+  return input.replace(/<.*?>/gi, ''); // Remove all HTML tags
+};
+
+//----------------JWT Security-----------------
+
+// Placeholder: Implement your logic for JWT token generation
+export const generateToken = (user: { id: string; username: string }): string => {
+  // Example: Generate JWT token with user information
+  const token = `${user.id}-${user.username}-jwt-secret`;
+  console.log(`Generated JWT token: ${token}`);
+  return token;
+};
+
+// Placeholder: Implement your logic for JWT token verification
+export const verifyToken = (token: string): { id: string; username: string } | null => {
+  // Example: Verify JWT token and extract user information
+  if (token.includes('-jwt-secret')) {
+    const [id, username] = token.split('-');
+    console.log(`Verified JWT token. User: ${username}`);
+    return { id, username };
+  } else {
+    console.log('Invalid JWT token');
+    return null;
+  }
+};
+
+export default api;
