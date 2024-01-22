@@ -1,4 +1,4 @@
-# src/PlaceholderComponent1.test.txt
+//PlaceholderComponent1.test.txt
 
 use super::*;
 
