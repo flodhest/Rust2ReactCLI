@@ -91,3 +91,44 @@ Rust2ReactCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+<details>
+  <summary>🌲 Project Structure Tree</summary>
+plaintext
+Copy code
+project_name/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── service-worker.js
+├── src/
+│   ├── Components/
+│   │   ├── Home/
+│   │   │   ├── Home.tsx
+│   │   │   └── Home.test.tsx
+│   │   ├── PlaceholderComponent1/
+│   │   │   ├── PlaceholderComponent1.tsx
+│   │   │   └── PlaceholderComponent1.test.tsx
+│   │   └── PlaceholderComponent2/
+│   │       ├── PlaceholderComponent2.tsx
+│   │       └── PlaceholderComponent2.test.tsx
+│   ├── Middleware/
+│   │   └── middleware.tsx
+│   ├── Models/
+│   │   └── PlaceholderModel.tsx
+│   ├── Service/
+│   │   └── BackendService.ts
+│   ├── Styles/
+│   │   ├── main.scss
+│   │   └── theme.js
+│   ├── Utils/
+│   │   └── utils.tsx
+│   ├── App.tsx
+│   └── index.tsx
+├── .env.development
+├── .env.production
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── webpack.config.js
+</details>
