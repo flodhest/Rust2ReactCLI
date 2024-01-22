@@ -1,39 +1,50 @@
-// Home.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.scss';
 
-const Home: React.FC = () => (
-  <div className="intro">
-    <div className="features">
-      <h2 className="feature-heading">🚀 Features</h2>
-      <ul className="feature-list">
-        <li>
+const Home: React.FC = () => {
+  // Example effect using useEffect
+  useEffect(() => {
+    // Update document title or perform other side effects
+
+    // Simulate cleanup logic when the component unmounts
+    return () => {
+      console.log('Home component unmounted');
+      // Add cleanup logic here if needed
+    };
+  }, []); // useEffect will run only once, similar to componentDidMount
+
+  return (
+    <div className="intro">
+      <div className="features">
+        <h2 className="feature-heading">🚀 Features</h2>
+        <p>
           <strong>Project Structure:</strong> Establishes a robust and organized architecture by configuring essential directories, such as services, models, components, styles, middleware, utility, and the source code itself. The design adheres to a Component-Based Architecture, ensuring modularity, scalability, and a clear separation of concerns within the React application.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>File Templates:</strong> Integrates fundamental files and boilerplate code into the project, covering key elements like placeholder components, backend services, models, environment configuration files, and a service worker. These templates expedite the development process and provide a solid foundation for building a feature-rich React application.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>TypeScript-Based React App:</strong> Generates a React app using TypeScript, providing strong static typing and an improved developer experience.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>Material-UI Integration & Responsive Design:</strong> Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. Includes setup for either Material-UI or custom media-queries for mobile, tablets, and desktop.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>SPA and Browser Router:</strong> Create a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>Progressive Web App (PWA):</strong> Elevates your application to Progressive Web App standards by registering a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>Jest Testing:</strong> Includes Jest for efficient and reliable unit testing of your React components, ensuring the robustness and reliability of your application.
-        </li>
-        <li>
+        </p>
+        <p>
           <strong>Environment Files:</strong> Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
-        </li>
-      </ul>
+        </p>
+   
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Home;
