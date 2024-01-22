@@ -33,6 +33,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Exclude requests with 'chrome-extension' scheme from caching
+  if (event.request.url.startsWith('chrome-extension://')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((staticCacheResponse) => {
       // Check if the request is in the static cache

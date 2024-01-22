@@ -17,31 +17,42 @@ const Home: React.FC = () => {
     <div className="intro">
       <div className="features">
         <h2 className="feature-heading">🚀 Features</h2>
-        <p>
-          <strong>Project Structure:</strong> Establishes a robust and organized architecture by configuring essential directories, such as services, models, components, styles, middleware, utility, and the source code itself. The design adheres to a Component-Based Architecture, ensuring modularity, scalability, and a clear separation of concerns within the React application.
-        </p>
-        <p>
-          <strong>File Templates:</strong> Integrates fundamental files and boilerplate code into the project, covering key elements like placeholder components, backend services, models, environment configuration files, and a service worker. These templates expedite the development process and provide a solid foundation for building a feature-rich React application.
-        </p>
-        <p>
-          <strong>TypeScript-Based React App:</strong> Generates a React app using TypeScript, providing strong static typing and an improved developer experience.
-        </p>
-        <p>
-          <strong>Material-UI Integration & Responsive Design:</strong> Enhances the visual appeal and user experience by seamlessly incorporating Material-UI components. Includes setup for either Material-UI or custom media-queries for mobile, tablets, and desktop.
-        </p>
-        <p>
-          <strong>SPA and Browser Router:</strong> Create a Single Page Application (SPA), providing smooth and uninterrupted user navigation. The inclusion of a Browser Router enables efficient client-side routing, enhancing the overall user experience with seamless transitions between different views.
-        </p>
-        <p>
-          <strong>Progressive Web App (PWA):</strong> Elevates your application to Progressive Web App standards by registering a foundational service worker. This feature enables offline access, background updates, and an enhanced user experience.
-        </p>
-        <p>
-          <strong>Jest Testing:</strong> Includes Jest for efficient and reliable unit testing of your React components, ensuring the robustness and reliability of your application.
-        </p>
-        <p>
-          <strong>Environment Files:</strong> Creates environment configuration files (`.env.development` and `.env.production`) to manage environment-specific variables. These files allow you to define variables like API endpoints or feature toggles for development and production environments separately.
-        </p>
-   
+        <div className="features-item">
+        
+          <li>
+            <strong>Robust Project Structure:</strong> Establish a Component-Based Architecture, ensuring modularity, scalability, and clear separation of concerns within the React application.
+          </li><br></br>
+          <li>
+            <strong>Efficient File Templates:</strong> Integrate fundamental files and boilerplate code, covering components, services, models, environment configurations, and a service worker for accelerated development.
+          </li><br></br>
+          <li>
+            <strong>TypeScript-Powered React App:</strong> Generate React applications with TypeScript, providing strong static typing for an improved developer experience.
+          </li><br></br>
+          <li>
+            <strong>Material-UI Integration & Responsive Design:</strong> Enhance visual appeal and user experience by seamlessly incorporating Material-UI components with responsive design for various devices.
+          </li><br></br>
+          <li>
+            <strong>SPA with Browser Router:</strong> Create a Single Page Application (SPA) with efficient client-side routing for smooth transitions between views, ensuring uninterrupted user navigation.
+          </li><br></br>
+          <li>
+            <strong>Progressive Web App (PWA):</strong> Elevate your app to PWA standards with a foundational service worker. Enable offline access, background updates and optimize caching strategies for static and dynamic content, ensuring improved offline access and responsiveness, even in challenging network conditions.
+          </li><br></br>
+          <li>
+            <strong>Jest Testing:</strong> Ensure application robustness with efficient and reliable Jest testing for React components.
+          </li><br></br>
+          <li>
+            <strong>Environment Configuration:</strong> Manage environment-specific variables through dedicated files (.env.development and .env.production) for streamlined development and production environments.
+          </li><br></br>
+          <li>
+            <strong>React Hooks:</strong> Utilize React Hooks for state management, side effects, and lifecycle events, promoting best practices for managing component lifecycles.
+          </li><br></br>
+          <li>
+            <strong>Security Measures:</strong> Implement security measures in to validate API calls, prevent SQL injection, handle Cross-Site Scripting (XSS), and manage JSON Web Tokens (JWT) for robust protection against common web vulnerabilities.
+          </li><br></br>
+          <li>
+            <strong>Utility Functions:</strong> Access utility functions in utils.tsx for tasks such as debouncing, whitespace checking, email format validation, currency formatting, query string parsing, and date formatting, simplifying and enhancing the development process.
+          </li>
+          </div>
       </div>
     </div>
   );
