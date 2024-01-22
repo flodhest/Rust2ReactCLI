@@ -9,33 +9,36 @@ Rust2ReactCLI is a command-line tool designed to streamline the process of creat
 <pre>
 project_name/
 ├── public/
-│   ├── index.html
-│   ├── manifest.json
-│   └── service-worker.js
+│ ├── index.html
+│ ├── manifest.json
+│ └── service-worker.js
 ├── src/
-│   ├── Components/
-│   │   ├── Home/
-│   │   │   ├── Home.tsx
-│   │   │   └── Home.test.tsx
-│   │   ├── PlaceholderComponent1/
-│   │   │   ├── PlaceholderComponent1.tsx
-│   │   │   └── PlaceholderComponent1.test.tsx
-│   │   └── PlaceholderComponent2/
-│   │       ├── PlaceholderComponent2.tsx
-│   │       └── PlaceholderComponent2.test.tsx
-│   ├── Middleware/
-│   │   └── middleware.tsx
-│   ├── Models/
-│   │   └── PlaceholderModel.tsx
-│   ├── Service/
-│   │   └── BackendService.ts
-│   ├── Styles/
-│   │   ├── main.scss
-│   │   └── theme.js
-│   ├── Utils/
-│   │   └── utils.tsx
-│   ├── App.tsx
-│   └── index.tsx
+│ ├── Components/
+│ │ ├── Home/
+│ │ │ ├── Home.tsx
+│ │ │ └── Home.scss
+│ │ │ └── Home.test.tsx
+│ │ ├── PlaceholderComponent1/
+│ │ │ ├── PlaceholderComponent1.tsx
+│ │ │ └── PlaceholderComponent1.scss
+│ │ │ └── PlaceholderComponent1.test.tsx
+│ │ └── PlaceholderComponent2/
+│ │ ├── PlaceholderComponent2.tsx
+│ │ └── PlaceholderComponent2.scss
+│ │ └── PlaceholderComponent2.test.tsx
+│ ├── Middleware/
+│ │ └── middleware.tsx
+│ ├── Models/
+│ │ └── PlaceholderModel.tsx
+│ ├── Service/
+│ │ └── BackendService.ts
+│ ├── Styles/
+│ │ ├── main.scss
+│ │ └── theme.js
+│ ├── Utils/
+│ │ └── utils.tsx
+│ ├── App.tsx
+│ └── index.tsx
 ├── .env.development
 ├── .env.production
 ├── .gitignore
