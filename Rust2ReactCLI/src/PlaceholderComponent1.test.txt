@@ -1,12 +1,10 @@
 //PlaceholderComponent1.test.txt
 
-use super::*;
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import PlaceholderComponent1 from './PlaceholderComponent1';
 
-#[wasm_bindgen_test]
-fn test_placeholder_component_1() {
-    let placeholder_component_1 = PlaceholderComponent1::new();
-    assert_eq!(
-        placeholder_component_1.render().to_string(),
-        "PlaceholderComponent1 content"
-    );
-}
+test('placeholder_component_2 renders content', () => {
+    render(<PlaceholderComponent1 />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+});
