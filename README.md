@@ -4,12 +4,9 @@
 
 Rust2ReactCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
 
-## 🌲 FileTree
-
 <details>
   <summary>🌲 Project Structure Tree</summary>
-arduino
-Copy code
+<pre>
 project_name/
 ├── public/
 │   ├── index.html
@@ -45,6 +42,7 @@ project_name/
 ├── package.json
 ├── tsconfig.json
 └── webpack.config.js
+</pre>
 </details>
 
 ## 🚀 Features
