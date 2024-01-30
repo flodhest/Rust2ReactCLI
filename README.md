@@ -1,6 +1,6 @@
 # Rust2ReactCLI - 🦀 Fast and Efficient React App Setup
 
-### Implements the latest **React 18.2** & **TypeScript 5.2**
+### Implements the latest **React 18.2** & **TypeScript**
 
 Rust2ReactCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
 
