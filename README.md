@@ -51,7 +51,10 @@ project_name/
 </pre>
 </details>
 
-## 🚀 Features
+Sure, here's an enhanced version with collapsible sections and some additional markdown styling:
+
+<details>
+<summary><strong>🚀 Features</strong></summary>
 
 **Project Features:**
 
@@ -65,7 +68,7 @@ project_name/
 
 5. **SPA with Browser Router:** Create a Single Page Application (SPA) with efficient client-side routing for smooth transitions between views, ensuring uninterrupted user navigation.
 
-6. **Progressive Web App (PWA):** Elevate your app to PWA standards with a foundational service worker. Enable offline access, background updates and optimize caching strategies for static and dynamic content, ensuring improved offline access and responsiveness, even in challenging network conditions.
+6. **Progressive Web App (PWA):** Elevate your app to PWA standards with a foundational service worker. Enable offline access, background updates, and optimize caching strategies for static and dynamic content, ensuring improved offline access and responsiveness, even in challenging network conditions.
 
 7. **Jest Testing:** Ensure application robustness with efficient and reliable Jest testing for React components.
 
@@ -73,14 +76,16 @@ project_name/
 
 9. **React Hooks:** Utilize React Hooks for state management, side effects, and lifecycle events, promoting best practices for managing component lifecycles.
 
-10. **Security Measures:** Implement security measures in to validate API calls, prevent SQL injection, handle Cross-Site Scripting (XSS), and manage JSON Web Tokens (JWT) for robust protection against common web vulnerabilities.
+10. **Security Measures:** Implement security measures to validate API calls, prevent SQL injection, handle Cross-Site Scripting (XSS), and manage JSON Web Tokens (JWT) for robust protection against common web vulnerabilities.
 
 11. **Utility Functions:** Access utility functions in utils.tsx for tasks such as debouncing, whitespace checking, email format validation, currency formatting, query string parsing, and date formatting, simplifying and enhancing the development process.
+</details>
 
-## 🛠 Prerequisites
+<details>
+<summary><strong>🛠 Prerequisites</strong></summary>
 
-Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. https://nodejs.org/dist/latest-v16.x/
-
+Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. [Download Node.js](https://nodejs.org/dist/latest-v16.x/)
+</details>
 ## 🏁 Getting Started
 
 1. **Clone the Rust2ReactCLI repository to your local machine:**
@@ -94,10 +99,8 @@ Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 insta
 
     Before proceeding, make sure you have Rust installed on your machine. If not, you can install Rust by running:
 
-    ```bash
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```
 
+    https://win.rustup.rs/x86_64
     Follow the instructions to complete the installation.
 
 3. **Build and Run Rust2ReactCLI:**
