@@ -1,151 +1,344 @@
-# Rust2ReactCLI - 🦀 Fast and Efficient React App Setup
+```markdown
+# **Front & Rear Perception System**  
+## **Unreal Engine 5 – GPU-Accelerated Sensor Suite**  
+> **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA Graph**
 
-### Implements the latest **React 18.2** & **TypeScript**
+---
 
-Rust2ReactCLI is a command-line tool designed to streamline the process of creating a responsive React app by automating various setup tasks. With Rust2ReactCLI, you can quickly set up the necessary project structure and files, saving you time and ensuring a consistent development environment across various devices.
+## Table of Contents
 
-<details>
-  <summary>🌲 Project Structure Tree</summary>
-<pre>
-project_name/
-├── public/
-│ ├── index.html
-│ ├── manifest.json
-│ └── service-worker.js
-├── src/
-│ ├── Components/
-│ │ ├── Home/
-│ │ │ ├── Home.tsx
-│ │ │ └── Home.scss
-│ │ │ └── Home.test.tsx
-│ │ ├── PlaceholderComponent1/
-│ │ │ ├── PlaceholderComponent1.tsx
-│ │ │ └── PlaceholderComponent1.scss
-│ │ │ └── PlaceholderComponent1.test.tsx
-│ │ └── PlaceholderComponent2/
-│ │ ├── PlaceholderComponent2.tsx
-│ │ └── PlaceholderComponent2.scss
-│ │ └── PlaceholderComponent2.test.tsx
-│ ├── Middleware/
-│ │ └── middleware.tsx
-│ ├── Models/
-│ │ └── PlaceholderModel.tsx
-│ ├── Security/
-│ │ └── SetupSecurity.tsx
-│ ├── Service/
-│ │ └── BackendService.ts
-│ ├── Styles/
-│ │ ├── main.scss
-│ │ └── theme.js
-│ ├── Utils/
-│ │ └── utils.tsx
-│ ├── App.tsx
-│ └── index.tsx
-├── .env.development
-├── .env.production
-├── .gitignore
-├── package.json
-├── tsconfig.json
-└── webpack.config.js
+- [Overview](#overview)
+- [Feature Matrix](#feature-matrix)
+- [Camera Pipeline – `AFront_camera_publisher` / `ARear_camera_publisher`](#camera-pipeline--afront_camera_publisher--arear_camera_publisher)
+  - [Compute Shader Processing (`MainCS.usf`)](#compute-shader-processing-maincsusf)
+  - [BMP Mode (`PerceptionMode = 0`)](#bmp-mode-perceptionmode--0)
+- [Lidar Pipeline – `AFront_lidar_publisher` / `ARear_lidar_publisher`](#lidar-pipeline--afront_lidar_publisher--arear_lidar_publisher)
+  - [`ULidarComponent` – **Core CUDA Engine**](#ulidarcomponent--core-cuda-engine)
+- [IMU Pipeline – `UDDSIMUPublisher`](#imu-pipeline--uddsimupublisher)
+  - [Key Features](#key-features)
+- [ESIM Config System – `UEsimConfigReaderSubsystem`](#esim-config-system--uesimconfigreadersubsystem)
+  - [Configuration Structure (Extended)](#configuration-structure-extended)
+- [System Components](#system-components)
+- [Threading & Async Flow](#threading--async-flow)
+- [Data Size (1920×1080)](#data-size-1920×1080)
+- [Configuration Panel](#configuration-panel)
+- [Debug Output (Toggle On/Off)](#debug-output-toggle-onoff)
+- [Quick Start Guide](#quick-start-guide)
+- [Performance Highlights](#performance-highlights)
 
-</pre>
-</details>
+---
 
-Sure, here's an enhanced version with collapsible sections and some additional markdown styling:
+<div align="center">
 
-<details>
-<summary><strong>🚀 Features</strong></summary>
+```mermaid
+graph TD
+    A[Unreal Scene] --> B[Scene Capture]
+    B --> C[Front Camera]
+    B --> D[Rear Camera]
+    B --> E[Front Lidar (5x)]
+    B --> F[Rear Lidar (5x)]
+    B --> G[Vehicle Pawn]
+    C --> H[HLSL Compute Shader]
+    D --> H
+    E --> I[CUDA Kernel via ULidarComponent]
+    F --> I
+    G --> J[IMU Publisher]
+    H --> K[BMP / BGR8]
+    I --> L[Point Cloud]
+    J --> M[sensor_msgs::Imu]
+    K --> N[CycloneDDS]
+    L --> N
+    M --> N
+```
 
-**Project Features:**
+**High-Performance Dual-Stream Sensor Pipeline**
 
-1. **Robust Project Structure:** Establish a Component-Based Architecture, ensuring modularity, scalability, and clear separation of concerns within the React application.
+| **Camera Path** | **Lidar Path** | **IMU Path** |
+|-----------------|----------------|-------------|
+| **HLSL Compute Shader** | **CUDA via `ULidarComponent`** | **Game Thread + Async DDS** |
+| **1 Capture each** | **5 Textures each** | **100 Hz+** |
+| **~6.2 MB/frame** | **~1.8 MB/cloud** | **~0.1 KB/msg** |
 
-2. **Efficient File Templates:** Integrate fundamental files and boilerplate code, covering components, services, models, environment configurations, and a service worker for accelerated development.
+</div>
 
-3. **TypeScript-Powered React App:** Generate React applications with TypeScript, providing strong static typing for an improved developer experience.
+---
 
-4. **Material-UI Integration & Responsive Design:** Enhance visual appeal and user experience by seamlessly incorporating Material-UI components with responsive design for various devices.
+## Overview
 
-5. **SPA with Browser Router:** Create a Single Page Application (SPA) with efficient client-side routing for smooth transitions between views, ensuring uninterrupted user navigation.
+A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system for **front and rear** vehicle sensors in Unreal Engine 5.  
+Includes **HDR camera processing**, **multi-layer Lidar point cloud generation**, and **high-frequency IMU publishing** via **CycloneDDS**.
 
-6. **Progressive Web App (PWA):** Elevate your app to PWA standards with a foundational service worker. Enable offline access, background updates, and optimize caching strategies for static and dynamic content, ensuring improved offline access and responsiveness, even in challenging network conditions.
+---
 
-7. **Jest Testing:** Ensure application robustness with efficient and reliable Jest testing for React components.
+## Feature Matrix
 
-8. **Environment Configuration:** Manage environment-specific variables through dedicated files (.env.development and .env.production) for streamlined development and production environments.
+| Feature | **Front Camera** | **Rear Camera** | **Front Lidar** | **Rear Lidar** | **IMU** |
+|--------|:----------------:|:---------------:|:---------------:|:--------------:|:------:|
+| **Sensor** | `USceneCaptureComponent2D` ×1 | `USceneCaptureComponent2D` ×1 | `USceneCaptureComponent2D` ×5 | `USceneCaptureComponent2D` ×5 | `EsimIMU_1_*` |
+| **Processing** | **HLSL Compute Shader** | **HLSL Compute Shader** | **CUDA via `ULidarComponent`** | **CUDA via `ULULidarComponent`** | **Blueprint + C++** |
+| **Input** | HDR Float (RGBA32f) | HDR Float (RGBA32f) | Depth, Color, Velocity, Intensity, Mask | Depth, Color, Velocity, Intensity, Mask | Vehicle State |
+| **Output** | BMP (with header) or BGR8 | BMP (with header) or BGR8 | ROS2 `PointCloud2` or Custom IDL | ROS2 `PointCloud2` or Custom IDL | `sensor_msgs::Imu` |
+| **DDS Topic** | `rt/FrontCameraImageTopic` | `rt/RearCameraImageTopic` | `rt/front_pointcloud` | `rt/rear_pointcloud` | `IMUTopic` |
+| **Double Buffer** | Yes (A/B) | Yes (A/B) | Yes (5 pairs) | Yes (5 pairs) | N/A |
+| **Motion Blur** | Configurable | Configurable | Always On | Always On | — |
+| **Weather Effects** | — | — | Rain/Fog Noise + Dropouts | Rain/Fog Noise + Dropouts | — |
+| **Radial Velocity** | — | — | Yes | Yes | Angular & Linear |
+| **Debug Save** | BMP/PNG | BMP/PNG | PLY + PNG | PLY + PNG | CSV Log |
+| **Mode Switch** | `0`=BMP, `1`=BGR8 | `0`=BMP, `1`=BGR8 | `0`=Custom, `1`=ROS2 | `0`=Custom, `1`=ROS2 | — |
+| **Coverage** | 120° FOV | 120° FOV | 120° FOV | 120° FOV | N/A |
 
-9. **React Hooks:** Utilize React Hooks for state management, side effects, and lifecycle events, promoting best practices for managing component lifecycles.
+---
 
-10. **Security Measures:** Implement security measures to validate API calls, prevent SQL injection, handle Cross-Site Scripting (XSS), and manage JSON Web Tokens (JWT) for robust protection against common web vulnerabilities.
+## Camera Pipeline – `AFront_camera_publisher` / `ARear_camera_publisher`
 
-11. **Utility Functions:** Access utility functions in utils.tsx for tasks such as debouncing, whitespace checking, email format validation, currency formatting, query string parsing, and date formatting, simplifying and enhancing the development process.
-</details>
+```mermaid
+flowchart LR
+    subgraph Capture ["Capture Stage"]
+        A[HDR Scene] --> B[USceneCaptureComponent2D]
+        B --> C[Double-Buffered RenderTarget A/B]
+    end
+    subgraph Process ["GPU Processing"]
+        C --> D[HLSL Compute Shader]
+        D --> E[Tone Map → Gamma → BGR8/BMP]
+    end
+    subgraph Publish ["Publish Stage"]
+        E --> F[CycloneDDS Zero-Copy]
+    end
+```
 
-<details>
-<summary><strong>🛠 Prerequisites</strong></summary>
+### Compute Shader Processing (`MainCS.usf`)
 
-Before using Rust2ReactCLI, ensure that you have Node.js version >=16.20.2 installed on your machine. [Download Node.js](https://nodejs.org/dist/latest-v16.x/)
-</details>
-## 🏁 Getting Started
+| Step | Operation | Details |
+|------|----------|--------|
+| 1 | **Sample** | Bilinear HDR (`Texture2D<float4>`) |
+| 2 | **Tone Map** | Exposure ×1.5 |
+| 3 | **Gamma** | 1/2.2 |
+| 4 | **Convert** | `float` → 8-bit BGR |
+| 5 | **Error Handling** | NaN/Inf → Black |
+| 6 | **BMP Header** | 54-byte (thread 0,0) |
+| 7 | **Padding** | 4-byte row alignment |
 
-1. **Clone the Rust2ReactCLI repository to your local machine:**
+> **Mode Switch**: `PerceptionMode = 0` → BMP, `1` → BGR8  
+> **Zero CPU Copy** via `FRHIGPUBufferReadback`
 
-    ```bash
-    git clone https://github.com/flodhest/Rust2ReactCLI.git
-    cd Rust2ReactCLI
-    ```
+---
 
-2. **Ensure Rust is Installed:**
+### BMP Mode (`PerceptionMode = 0`)
 
-    Before proceeding, make sure you have Rust installed on your machine. If not, you can install Rust by running:
+- Full 54-byte header written on GPU
+- Bottom-up row order (flipped Y)
+- Row padding to 4-byte boundary
+- No extra CPU allocation
 
+---
 
-    https://win.rustup.rs/x86_64
-    Follow the instructions to complete the installation.
+## Lidar Pipeline – `AFront_lidar_publisher` / `ARear_lidar_publisher`
 
-3. **Build and Run Rust2ReactCLI:**
+```mermaid
+flowchart LR
+    subgraph Capture ["Multi-Texture Capture"]
+        A[5x USceneCaptureComponent2D] --> B[Depth, Color, Velocity, Intensity, Mask]
+        B --> C[Double-Buffered (5 pairs)]
+    end
+    subgraph Process ["CUDA Processing"]
+        C --> D[ULidarComponent::LaunchPointCloudKernelAsync]
+        D --> E[Point Cloud Generation]
+        E --> F[CUDA Graph (Optional)]
+    end
+    subgraph Publish ["DDS Output"]
+        F --> G[CycloneDDS Async Publish]
+    end
+```
 
-    ```bash
-    cargo run
-    ```
+### `ULidarComponent` – **Core CUDA Engine**
 
-    Follow the prompts to enter the project name, the project will be generated in Rust2ReactCLI/src. Run the terminal from the new projects folder. 
+| Feature | Implementation |
+|--------|----------------|
+| **Kernel Compilation** | `CompileAndLoadKernel()` via NVRTC + JIT |
+| **Kernel Selection** | `depthToPointCloudParentKernelCustomIDL` or `Standard` |
+| **External Memory** | D3D12 → CUDA via `cudaImportExternalMemory` |
+| **Texture Binding** | `cudaTextureObject_t` (point sampling) |
+| **CUDA Graph** | `BeginStreamCapture()` → `cuGraphLaunch` |
+| **Pinned Memory** | `cudaHostAlloc` for zero-copy |
+| **Sync** | D3D12 Fence → CUDA Semaphore |
+| **Compute Support** | Blackwell (`compute_120`) • Ada (`compute_89`) |
 
-4. **Project Setup:**
+> **Runtime Compilation**  
+> **Graph Mode** for low-overhead repeated launches
 
-    Once completed, your React app project will be set up with the specified structure and files.
+---
 
-5. **Navigate to Your React App:**
+## IMU Pipeline – `UDDSIMUPublisher`
 
-    ```bash
-    cd your_project_name
-    ```
+```mermaid
+flowchart LR
+    A[Vehicle Pawn] --> B[EsimIMU_1_* Functions]
+    B --> C[LinearAccel, AngularVel, Orientation]
+    C --> D[ROS2 sensor_msgs::Imu]
+    D --> E[CycloneDDS Writer]
+    E --> F[Topic: IMUTopic]
+```
 
-6. **Install Node.js Dependencies:**
+### Key Features
 
-    ```bash
-    npm i -g yarn
-    yarn install
-    ```
+| Feature | Value |
+|--------|-------|
+| **Frame ID** | Configurable (`IMU_Frame`) |
+| **Sequence** | Auto-increment |
+| **Timestamp** | `sec` + `nanosec` |
+| **Covariance** | Configurable diagonal |
+| **Log Output** | `Timestamps_XY.log` + `SensorCounts.log` |
+| **Rate Logging** | 1 Hz stats |
 
-    This command installs the necessary Node.js dependencies for your React app.
+> **Async DDS Write** via `AsyncTask(ENamedThreads::AnyBackgroundHiPriTask)`
 
-7. **Run Your React App:**
+---
 
-    ```bash
-    yarn start
-    ```
+## ESIM Config System – `UEsimConfigReaderSubsystem`
 
-    This command starts your React app, and you can view it by navigating to `http://localhost:3000` in your web browser.
+```mermaid
+flowchart TD
+    A[vehicle_config.yml] --> B[Parse YAML]
+    B --> C[FEsimData Struct]
+    C --> D[Perception Modes]
+    C --> E[Spawn Locations]
+    C --> F[Camera & Lidar Rig]
+    C --> G[IMU Settings]
+    D --> H[Front/Rear Sensors]
+    E --> I[Spawn in World]
+    F --> J[Sensor Placement]
+    G --> K[IMU Frame ID, Covariance]
+```
 
-## 🚧 Additional Resources
+### Configuration Structure (Extended)
 
-- [Node.js Installation](https://nodejs.org/dist/latest-v16.x/): Download and install Node.js version >16.20.2 manually if needed.
+| Category | Key | Type | Description |
+|--------|-----|------|-----------|
+| **Perception** | `FrontPerceptionMode` | `int32` | `0`=Off, `1`=On |
+| | `RearPerceptionMode` | `int32` | `0`=Off, `1`=On |
+| | `PerceptionDefinitionMode` | `int32` | `0`=Custom IDL, `1`=ROS2 |
+| | `FlipPointCloudLeftRight` | `bool` | Mirror X-axis |
+| **Camera** | `ResolutionX`, `ResolutionY` | `int32` | Image resolution |
+| **Motion Blur** | `Enabled` | `bool` | Global motion blur |
+| **IMU** | `IMUFrameId` | `FString` | ROS2 frame_id |
+| | `OrientationCovarianceDiag` | `FVector` | Diagonal values |
+| **Rig (base_link)** | `front_camera_link_loc/rot` | `FVector/FRotator` | Front camera pose |
+| | `rear_camera_link_loc/rot` | `FVector/FRotator` | Rear camera pose |
+| | `front_laser_link_loc/rot` | `FVector/FRotator` | Front Lidar pose |
+| | `rear_laser_link_loc/rot` | `FVector/FRotator` | Rear Lidar pose |
 
-## 🙏 Acknowledgments
+---
 
-Rust2ReactCLI is powered by the [dialoguer](https://crates.io/crates/dialoguer) crate for interactive command-line prompts.
+## System Components
 
-## 📄 License
+| Component | Role | Key Functions |
+|----------|------|---------------|
+| `AFront_camera_publisher` | Front camera | `CaptureFrame`, `ProcessFrameGPU` |
+| `ARear_camera_publisher` | Rear camera | `CaptureFrame`, `ProcessFrameGPU` |
+| `AFront_lidar_publisher` | Front Lidar | `ProcessLidarFrame`, `PublishPointcloud` |
+| `ARear_lidar_publisher` | Rear Lidar | `ProcessLidarFrame`, `PublishPointcloud` |
+| `ULidarComponent` | **CUDA Engine** | `CompileAndLoadKernel`, `LaunchPointCloudKernelAsync` |
+| `UKernelContainer` | Kernel manager | Stores source & entry points |
+| `UDDSIMUPublisher` | **IMU + Stats** | `WriteDDS`, `LogSensorStats` |
+| `UEsimConfigReaderSubsystem` | Config loader | YAML → `FEsimData`, spawn handling |
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+## Threading & Async Flow
+
+```mermaid
+graph TD
+    A[Game Thread] --> B[Timer → Capture]
+    B --> C[Render Thread]
+    C --> D[ENQUEUE_RENDER_COMMAND]
+    D --> E[Scene Capture]
+    E --> F[HLSL Shader]
+    E --> G[CUDA Stream]
+    F --> H[AsyncTask → DDS]
+    G --> I[Async Kernel Launch]
+    I --> J[High-Priority Task → DDS]
+    K[IMU Tick] --> L[Async DDS Write]
+```
+
+> **Zero CPU memory copy**  
+> **Fully asynchronous**  
+> **CUDA Graph support for Lidar**
+
+---
+
+## Data Size (1920×1080)
+
+| Data | Size |
+|------|------|
+| **BGR8 Image** | **~6.22 MB** |
+| **BMP (padded)** | **~6.25 MB** |
+| **Point Cloud (per Lidar)** | **~1.84 MB** (76k points × 24 bytes) |
+| **Dual Lidar Total** | **~3.68 MB** |
+| **IMU Message** | **~100 bytes** |
+
+---
+
+## Configuration Panel
+
+| Setting | Values | Effect |
+|--------|--------|-------|
+| `FrontPerceptionMode` | `0` = Off, `1` = On | Enable front sensors |
+| `RearPerceptionMode` | `0` = Off, `1` = On | Enable rear sensors |
+| `PerceptionDefinitionMode` | `0` = Custom, `1` = ROS2 | Output format |
+| `FlipPointCloudLeftRight` | `true` / `false` | Mirror X-axis |
+| `MotionBlur.Enabled` | `true` / `false` | Add blur |
+| `IMUFrameId` | `FString` | ROS2 frame |
+| `OrientationCovarianceDiag` | `FVector` | IMU noise model |
+
+---
+
+## Debug Output (Toggle On/Off)
+
+| Output | Format | Folder | Toggle |
+|-------|--------|--------|--------|
+| Front Camera | BMP/PNG | `SavedImages/` | `bDumpFrontImages` |
+| Rear Camera | BMP/PNG | `SavedImages/` | `bDumpRearImages` |
+| Front Depth | PNG | `SavedImages/` | `bDumpFrontDepth` |
+| Rear Depth | PNG | `SavedImages/` | `bDumpRearDepth` |
+| Front Point Cloud | PLY | `PointClouds/` | `bDumpFrontPLY` |
+| Rear Point Cloud | PLY | `PointClouds/` | `bDumpRearPLY` |
+| **IMU Log** | CSV | `Log/Timestamps_XY.log` | Always |
+| **Sensor Rates** | CSV | `Log/SensorCounts.log` | Always |
+
+---
+
+## Quick Start Guide
+
+1. Set `FrontPerceptionMode = 1`, `RearPerceptionMode = 1` in `vehicle_config.yml`  
+2. Choose `PerceptionDefinitionMode` (0 or 1)  
+3. Set `IMUFrameId` and covariance if needed  
+4. Launch in UE5 → Auto-capture + IMU starts  
+5. Listen to DDS topics:  
+   - `rt/FrontCameraImageTopic`  
+   - `rt/RearCameraImageTopic`  
+   - `rt/front_pointcloud`  
+   - `rt/rear_pointcloud`  
+   - `IMUTopic`  
+6. View debug in `SavedImages/`, `PointClouds/`, `Log/`
+
+---
+
+## Performance Highlights
+
+| Metric | Value |
+|-------|-------|
+| **GPU Only** | Yes |
+| **CPU Copy** | 0 bytes |
+| **Double Buffered** | Yes |
+| **Async Publish** | Yes |
+| **Real-Time Ready** | Yes |
+| **IMU @ 100+ Hz** | Yes |
+| **CUDA Graph** | Optional |
+
+---
+
+**Fully GPU-Driven. Zero CPU Bottleneck. Front & Rear Sensor Fusion.**  
+*Last Updated: November 2025*
+
+---
+```
