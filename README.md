@@ -1,6 +1,6 @@
 # **Front & Rear Perception System**  
 ## **Unreal Engine 5 – GPU-Accelerated Sensor Suite**  
-> **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA Graph**
+> **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA**
 
 ---
 
@@ -59,15 +59,17 @@ A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system 
 
 ```mermaid
 flowchart LR
-    subgraph Capture ["Capture Stage"]
+    subgraph Capture [Capture Stage]
         A[HDR Scene] --> B[USceneCaptureComponent2D]
         B --> C[Double-Buffered RenderTarget A/B]
     end
-    subgraph Process ["GPU Processing"]
+    
+    subgraph Process [GPU Processing]
         C --> D[HLSL Compute Shader]
         D --> E[Tone Map → Gamma → BGR8/BMP]
     end
-    subgraph Publish ["Publish Stage"]
+    
+    subgraph Publish [Publish Stage]
         E --> F[CycloneDDS Zero-Copy]
     end
 ```
@@ -100,17 +102,18 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    subgraph Capture ["Multi-Texture Capture"]
+    subgraph Capture [Multi-Texture Capture]
         A[5x USceneCaptureComponent2D] --> B[Depth, Color, Velocity, Intensity, Mask]
-        B --> C[Double-Buffered (5 pairs)]
+        B --> C[Double-Buffered 5 pairs]
     end
-    subgraph Process ["CUDA Processing"]
+    
+    subgraph Process [CUDA Processing]
         C --> D[ULidarComponent::LaunchPointCloudKernelAsync]
         D --> E[Point Cloud Generation]
-        E --> F[CUDA Graph (Optional)]
     end
-    subgraph Publish ["DDS Output"]
-        F --> G[CycloneDDS Async Publish]
+    
+    subgraph Publish [DDS Output]
+        E --> F[CycloneDDS Async Publish]
     end
 ```
 
@@ -122,13 +125,24 @@ flowchart LR
 | **Kernel Selection** | `depthToPointCloudParentKernelCustomIDL` or `Standard` |
 | **External Memory** | D3D12 → CUDA via `cudaImportExternalMemory` |
 | **Texture Binding** | `cudaTextureObject_t` (point sampling) |
-| **CUDA Graph** | `BeginStreamCapture()` → `cuGraphLaunch` |
 | **Pinned Memory** | `cudaHostAlloc` for zero-copy |
 | **Sync** | D3D12 Fence → CUDA Semaphore |
 | **Compute Support** | Blackwell (`compute_120`) • Ada (`compute_89`) |
 
 > **Runtime Compilation**  
-> **Graph Mode** for low-overhead repeated launches
+> **Stream-based execution** for real-time performance
+
+### Kernel Features
+
+**Custom IDL Mode** (`PerceptionDefinitionMode = 0`):
+- **5 floats per point**: X, Y, Z, Intensity, Radial Velocity
+- **Velocity-based radial velocity calculation**
+- **Weather-based point dropout simulation**
+
+**ROS2 Mode** (`PerceptionDefinitionMode = 1`):
+- **6 floats per point**: X, Y, Z, Intensity, Timestamp, Packed Color (RGB)
+- **Color information from scene capture**
+- **Standard PointCloud2 compatibility**
 
 ---
 
@@ -226,7 +240,7 @@ graph TD
 
 > **Zero CPU memory copy**  
 > **Fully asynchronous**  
-> **CUDA Graph support for Lidar**
+> **CUDA Stream execution for Lidar**
 
 ---
 
@@ -303,9 +317,21 @@ graph TD
 | **Async Publish** | Yes |
 | **Real-Time Ready** | Yes |
 | **IMU @ 100+ Hz** | Yes |
-| **CUDA Graph** | Optional |
+| **CUDA Streams** | Yes |
 
 ---
 
 **Fully GPU-Driven. Zero CPU Bottleneck. Front & Rear Sensor Fusion.**  
 *Last Updated: November 2025*
+
+---
+
+## Key Changes Made:
+
+1. **Removed CUDA Graph references** throughout the documentation
+2. **Fixed Mermaid diagram syntax** - removed problematic characters and simplified labels
+3. **Updated Lidar Pipeline section** to reflect stream-based execution instead of graph mode
+4. **Corrected performance highlights** to show CUDA Streams instead of CUDA Graph
+5. **Cleaned up kernel documentation** to focus on the actual implementation without graph mode
+
+The system now accurately reflects your **stream-based CUDA execution** without any graph mode dependencies.
