@@ -1,6 +1,6 @@
 # **Front & Rear Perception System**  
 ## **Unreal Engine 5 – GPU-Accelerated Sensor Suite**  
-> **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA**
+> **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA • ComputeShader**
 
 ---
 
@@ -17,7 +17,6 @@
 - [Data Size](#data-size)
 - [Configuration Panel](#configuration-panel)
 - [Debug Output](#debug-output)
-- [Quick Start Guide](#quick-start-guide)
 - [Performance Highlights](#performance-highlights)
 
 ---
@@ -28,7 +27,7 @@ A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system 
 
 **Key Capabilities:**
 - **HDR camera processing** via HLSL compute shaders
-- **Multi-layer Lidar point cloud generation** via CUDA kernels
+- **Multi-layer Lidar point cloud generation** via CUDA kernels with **weather simulation**
 - **High-frequency IMU publishing** via CycloneDDS
 - **Double-buffered, asynchronous, real-time ready**
 
@@ -47,7 +46,7 @@ A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system 
 | **DDS Topic** | `rt/FrontCameraImageTopic` | `rt/RearCameraImageTopic` | `rt/front_pointcloud` | `rt/rear_pointcloud` | `IMUTopic` |
 | **Double Buffer** | Yes (A/B) | Yes (A/B) | Yes (5 pairs) | Yes (5 pairs) | N/A |
 | **Motion Blur** | Configurable | Configurable | Always On | Always On | — |
-| **Weather Effects** | — | — | Rain/Fog Noise + Dropouts | Rain/Fog Noise + Dropouts | — |
+| **Weather Effects** | — | — | **Rain/Fog Noise + Dropouts (Both Modes)** | **Rain/Fog Noise + Dropouts (Both Modes)** | — |
 | **Radial Velocity** | — | — | Yes | Yes | Angular & Linear |
 | **Debug Save** | BMP/PNG | BMP/PNG | PLY + PNG | PLY + PNG | CSV Log |
 | **Mode Switch** | `0`=BMP, `1`=BGR8 | `0`=BMP, `1`=BGR8 | `0`=Custom, `1`=ROS2 | `0`=Custom, `1`=ROS2 | — |
@@ -74,7 +73,7 @@ flowchart LR
     end
 ```
 
-### HLSL Compute Shader (`MainCS.usf`)
+### HLSL Compute Shader Processing
 
 | Step | Operation | Details |
 |------|-----------|---------|
@@ -109,7 +108,7 @@ flowchart LR
     
     subgraph Process [CUDA Processing]
         C --> D[ULidarComponent::LaunchPointCloudKernelAsync]
-        D --> E[Point Cloud Generation]
+        D --> E[Point Cloud Generation + Weather Simulation]
     end
     
     subgraph Publish [DDS Output]
@@ -132,6 +131,17 @@ flowchart LR
 > **Runtime Compilation**  
 > **Stream-based execution** for real-time performance
 
+### **Weather Simulation System**
+
+**Available in BOTH ROS2 and Custom IDL Modes:**
+
+| Weather Effect | Implementation | Impact |
+|----------------|----------------|---------|
+| **Noise Injection** | `weatherBasedNoise()` function | Adds positional noise based on weather intensity |
+| **Point Dropouts** | `applyWeatherCondition()` | Simulates rain/fog interception |
+| **Distance-Based Effects** | Range-dependent noise scaling | More noise at longer distances |
+| **Configurable Intensity** | `WeatherEffectIntensity` (0.0-1.0) | User-controlled weather severity |
+
 ### Kernel Features
 
 **Custom IDL Mode** (`PerceptionDefinitionMode = 0`):
@@ -143,6 +153,7 @@ flowchart LR
 - **6 floats per point**: X, Y, Z, Intensity, Timestamp, Packed Color (RGB)
 - **Color information from scene capture**
 - **Standard PointCloud2 compatibility**
+- **Full weather simulation** (same as Custom IDL mode)
 
 ---
 
@@ -342,6 +353,7 @@ graph TD
 | `MotionBlur.Enabled` | `true` / `false` | Add blur |
 | `IMU Frame Id` | `FString` | ROS2 frame |
 | `Orientation Covariance Diag` | `FVector` | IMU noise model |
+| `Weather Effect Intensity` | `0.0` - `1.0` | Lidar weather simulation |
 
 ---
 
@@ -360,31 +372,6 @@ graph TD
 
 ---
 
-## Quick Start Guide
-
-1. **Edit `vehicle_config.yml`:**
-   ```yaml
-   FrontPerceptionMode: 1
-   RearPerceptionMode: 1
-   PerceptionDefinitionMode: 1  # 0=Custom, 1=ROS2
-   IMUFrameId: "imu_link"
-   OrientationCovarianceDiag: [0.001, 0.001, 0.001]
-   ```
-2. **Launch in Unreal Engine 5**
-3. **Listen to DDS Topics:**
-   - `rt/FrontCameraImageTopic`
-   - `rt/RearCameraImageTopic`
-   - `rt/front_pointcloud`
-   - `rt/rear_pointcloud`
-   - `IMUTopic`
-4. **View Debug Output:**
-   - Images: `SavedImages/`
-   - Point Clouds: `PointClouds/`
-   - IMU Data: `Log/Timestamps_XY.log`
-   - System Stats: `Log/SensorCounts.log`
-
----
-
 ## Performance Highlights
 
 | Metric | Value |
@@ -396,6 +383,7 @@ graph TD
 | **Real-Time Ready** | Yes |
 | **IMU @ 100+ Hz** | Yes |
 | **CUDA Streams** | Yes |
+| **Weather Simulation** | Both Modes |
 
 ---
 
