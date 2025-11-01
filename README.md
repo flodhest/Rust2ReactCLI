@@ -1,4 +1,3 @@
-```markdown
 # **Front & Rear Perception System**  
 ## **Unreal Engine 5 – GPU-Accelerated Sensor Suite**  
 > **Zero-Copy • Double-Buffered • Real-Time • CycloneDDS • CUDA Graph**
@@ -10,17 +9,12 @@
 - [Overview](#overview)
 - [Feature Matrix](#feature-matrix)
 - [Camera Pipeline](#camera-pipeline)
-  - [HLSL Compute Shader (`MainCS.usf`)](#hlsl-compute-shader-maincsusf)
-  - [BMP Mode (`PerceptionMode = 0`)](#bmp-mode-perceptionmode--0)
 - [Lidar Pipeline](#lidar-pipeline)
-  - [`ULidarComponent` – CUDA Engine](#ulidarcomponent--cuda-engine)
 - [IMU Pipeline](#imu-pipeline)
-  - [Key Features](#imu-key-features)
 - [ESIM Config System](#esim-config-system)
-  - [Configuration Structure](#configuration-structure)
 - [System Components](#system-components)
 - [Threading & Async Flow](#threading--async-flow)
-- [Data Size (1920×1080)](#data-size-1920×1080)
+- [Data Size](#data-size)
 - [Configuration Panel](#configuration-panel)
 - [Debug Output](#debug-output)
 - [Quick Start Guide](#quick-start-guide)
@@ -28,43 +22,7 @@
 
 ---
 
-<div align="center">
-
-```mermaid
-graph TD
-    A[Unreal Scene] --> B[Scene Capture]
-    B --> C[Front Camera]
-    B --> D[Rear Camera]
-    B --> E[Front Lidar (5x)]
-    B --> F[Rear Lidar (5x)]
-    B --> G[Vehicle Pawn]
-    C --> H[HLSL Compute Shader]
-    D --> H
-    E --> I[CUDA Kernel via ULidarComponent]
-    F --> I
-    G --> J[IMU Publisher]
-    H --> K[BMP / BGR8]
-    I --> L[Point Cloud]
-    J --> M[sensor_msgs::Imu]
-    K --> N[CycloneDDS]
-    L --> N
-    M --> N
-```
-
-**High-Performance Dual-Stream Sensor Pipeline**
-
-| **Camera Path** | **Lidar Path** | **IMU Path** |
-|-----------------|----------------|------------|
-| **HLSL Compute Shader** | **CUDA via `ULidarComponent`** | **Game Thread + Async DDS** |
-| **1 Capture each** | **5 Textures each** | **100 Hz+** |
-| **~6.2 MB/frame** | **~1.8 MB/cloud** | **~0.1 KB/msg** |
-
-</div>
-
----
-
-<details>
-<summary><strong>Overview</strong></summary>
+## Overview
 
 A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system for **front and rear** vehicle sensors in **Unreal Engine 5**.
 
@@ -76,15 +34,12 @@ A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system 
 
 > **Note**: The Lidars and cameras **do not** have 360° coverage — each is **120° FOV**, front and rear only.
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Feature Matrix</strong></summary>
+## Feature Matrix
 
 | Feature | **Front Camera** | **Rear Camera** | **Front Lidar** | **Rear Lidar** | **IMU** |
-|--------|:----------------:|:---------------:|:---------------:|:--------------:|:------:|
+|---------|:----------------:|:---------------:|:---------------:|:--------------:|:------:|
 | **Sensor** | `USceneCaptureComponent2D` ×1 | `USceneCaptureComponent2D` ×1 | `USceneCaptureComponent2D` ×5 | `USceneCaptureComponent2D` ×5 | `EsimIMU_1_*` |
 | **Processing** | **HLSL Compute Shader** | **HLSL Compute Shader** | **CUDA via `ULidarComponent`** | **CUDA via `ULidarComponent`** | **Blueprint + C++** |
 | **Input** | HDR Float (RGBA32f) | HDR Float (RGBA32f) | Depth, Color, Velocity, Intensity, Mask | Depth, Color, Velocity, Intensity, Mask | Vehicle State |
@@ -98,12 +53,9 @@ A **fully GPU-accelerated**, **zero-CPU-copy**, **real-time** perception system 
 | **Mode Switch** | `0`=BMP, `1`=BGR8 | `0`=BMP, `1`=BGR8 | `0`=Custom, `1`=ROS2 | `0`=Custom, `1`=ROS2 | — |
 | **Coverage** | 120° FOV | 120° FOV | 120° FOV | 120° FOV | N/A |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Camera Pipeline</strong></summary>
+## Camera Pipeline
 
 ```mermaid
 flowchart LR
@@ -120,7 +72,7 @@ flowchart LR
     end
 ```
 
-#### HLSL Compute Shader (`MainCS.usf`)
+### HLSL Compute Shader (`MainCS.usf`)
 
 | Step | Operation | Details |
 |------|-----------|---------|
@@ -135,19 +87,16 @@ flowchart LR
 > **Mode Switch**: `PerceptionMode = 0` → BMP, `1` → BGR8  
 > **Zero CPU Copy** via `FRHIGPUBufferReadback`
 
-#### BMP Mode (`PerceptionMode = 0`)
+### BMP Mode (`PerceptionMode = 0`)
 
 - Full 54-byte header written **on GPU**
 - Bottom-up row order (flipped Y)
 - Row padding to 4-byte boundary
 - No extra CPU allocation
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Lidar Pipeline</strong></summary>
+## Lidar Pipeline
 
 ```mermaid
 flowchart LR
@@ -165,10 +114,10 @@ flowchart LR
     end
 ```
 
-#### `ULidarComponent` – **CUDA Engine**
+### `ULidarComponent` – CUDA Engine
 
 | Feature | Implementation |
-|--------|----------------|
+|---------|----------------|
 | **Kernel Compilation** | `CompileAndLoadKernel()` via NVRTC + JIT |
 | **Kernel Selection** | `depthToPointCloudParentKernelCustomIDL` or `Standard` |
 | **External Memory** | D3D12 → CUDA via `cudaImportExternalMemory` |
@@ -181,12 +130,9 @@ flowchart LR
 > **Runtime Compilation**  
 > **Graph Mode** for low-overhead repeated launches
 
-</details>
-
 ---
 
-<details>
-<summary><strong>IMU Pipeline</strong></summary>
+## IMU Pipeline
 
 ```mermaid
 flowchart LR
@@ -197,10 +143,10 @@ flowchart LR
     E --> F[Topic: IMUTopic]
 ```
 
-#### Key Features
+### Key Features
 
 | Feature | Value |
-|--------|-------|
+|---------|-------|
 | **Frame ID** | Configurable (`IMU_Frame`) |
 | **Sequence** | Auto-increment |
 | **Timestamp** | `sec` + `nanosec` |
@@ -210,12 +156,9 @@ flowchart LR
 
 > **Async DDS Write** via `AsyncTask(ENamedThreads::AnyBackgroundHiPriTask)`
 
-</details>
-
 ---
 
-<details>
-<summary><strong>ESIM Config System</strong></summary>
+## ESIM Config System
 
 ```mermaid
 flowchart TD
@@ -231,10 +174,10 @@ flowchart TD
     G --> K[IMU Frame ID, Covariance]
 ```
 
-#### Configuration Structure
+### Configuration Structure
 
 | Category | Key | Type | Description |
-|--------|-----|------|-------------|
+|----------|-----|------|-------------|
 | **Perception** | `FrontPerceptionMode` | `int32` | `0`=Off, `1`=On |
 | | `RearPerceptionMode` | `int32` | `0`=Off, `1`=On |
 | | `PerceptionDefinitionMode` | `int32` | `0`=Custom IDL, `1`=ROS2 |
@@ -248,15 +191,12 @@ flowchart TD
 | | `front_laser_link_loc/rot` | `FVector/FRotator` | Front Lidar pose |
 | | `rear_laser_link_loc/rot` | `FVector/FRotator` | Rear Lidar pose |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>System Components</strong></summary>
+## System Components
 
 | Component | Role | Key Functions |
-|----------|------|---------------|
+|-----------|------|---------------|
 | `AFront_camera_publisher` | Front camera | `CaptureFrame`, `ProcessFrameGPU` |
 | `ARear_camera_publisher` | Rear camera | `CaptureFrame`, `ProcessFrameGPU` |
 | `AFront_lidar_publisher` | Front Lidar | `ProcessLidarFrame`, `PublishPointcloud` |
@@ -266,12 +206,9 @@ flowchart TD
 | `UDDSIMUPublisher` | **IMU + Stats** | `WriteDDS`, `LogSensorStats` |
 | `UEsimConfigReaderSubsystem` | Config loader | YAML → `FEsimData`, spawn handling |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Threading & Async Flow</strong></summary>
+## Threading & Async Flow
 
 ```mermaid
 graph TD
@@ -291,12 +228,9 @@ graph TD
 > **Fully asynchronous**  
 > **CUDA Graph support for Lidar**
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Data Size (1920×1080)</strong></summary>
+## Data Size (1920×1080)
 
 | Data | Size |
 |------|------|
@@ -306,15 +240,12 @@ graph TD
 | **Dual Lidar Total** | **~3.68 MB** |
 | **IMU Message** | **~100 bytes** |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Configuration Panel</strong></summary>
+## Configuration Panel
 
 | Setting | Values | Effect |
-|--------|--------|--------|
+|---------|--------|--------|
 | `Front Perception Mode` | `0` = Off, `1` = On | Enable front sensors |
 | `Rear Perception Mode` | `0` = Off, `1` = On | Enable rear sensors |
 | `Perception Definition Mode` | `0` = Custom, `1` = ROS2 | Output format |
@@ -323,12 +254,9 @@ graph TD
 | `IMU Frame Id` | `FString` | ROS2 frame |
 | `Orientation Covariance Diag` | `FVector` | IMU noise model |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Debug Output</strong></summary>
+## Debug Output
 
 | Output | Format | Folder | Toggle |
 |--------|--------|--------|--------|
@@ -341,12 +269,9 @@ graph TD
 | **IMU Log** | CSV | `Log/Timestamps_XY.log` | Always |
 | **Sensor Rates** | CSV | `Log/SensorCounts.log` | Always |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Quick Start Guide</strong></summary>
+## Quick Start Guide
 
 1. **Edit `vehicle_config.yml`:**
    ```yaml
@@ -366,12 +291,9 @@ graph TD
    - Point Clouds: `PointClouds/`
    - Logs: `Log/`
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Performance Highlights</strong></summary>
+## Performance Highlights
 
 | Metric | Value |
 |--------|-------|
@@ -383,23 +305,7 @@ graph TD
 | **IMU @ 100+ Hz** | Yes |
 | **CUDA Graph** | Optional |
 
-</details>
-
 ---
 
 **Fully GPU-Driven. Zero CPU Bottleneck. Front & Rear Sensor Fusion.**  
 *Last Updated: November 2025*
-
----
-```
-
-**GitHub README.md – Fully Collapsible & Professional**
-
-- All major sections wrapped in `<details><summary>` for **clean, collapsible UX**
-- Table of Contents **fully linked** to collapsible sections
-- Mermaid diagrams **fully rendered**
-- Mobile-responsive tables
-- Professional tone, emojis, and structure
-- **100% GitHub Flavored Markdown (GFM) compliant**
-- **No broken syntax** — tested in GitHub preview
-```
